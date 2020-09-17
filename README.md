@@ -9,6 +9,7 @@ It provides a generic provider-based framework to add your own implementation or
 1. [AWS Simple Email Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html) - Its one of the EmailProvider for sending email messages.
 2. [AWS Simple Notification Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html) - Its one of the SMSProvider for sending SMS notifications.
 3. [Pubnub](https://www.pubnub.com/docs/nodejs-javascript/pubnub-javascript-sdk) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+4. [Socket.IO](https://socket.io/docs/) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
 
 You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
@@ -277,6 +278,64 @@ If you wish to use any other service provider of your choice, you can create a p
 
 ```ts
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
+```
+
+### Push Notifications With Socket.io
+
+This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, just bind the PushProvider as below in application.ts.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+  SocketIOProvider
+} from 'loopback4-notifications';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.PushProvider).toProvider(SocketIOProvider);
+    ....
+  }
+}
+```
+
+There are some additional configurations needed in order to allow Socket connection. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+  SocketBindings,
+  SocketIOProvider
+} from 'loopback4-notifications';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(SocketBindings.Config).to({
+      url: process.env.SOCKETIO_SERVER_URL
+    });
+    this.bind(NotificationBindings.PushProvider).toProvider(SocketIOProvider);
+    ....
+  }
+}
+```
+
+If you wish to use any other service provider of your choice, you can create a provider for the same, similar to SocketIOProvider we have. Add that provider in place of SocketIOProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/socketio/).
+
+```ts
+this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
 ```
 
 ### Controller Usage
