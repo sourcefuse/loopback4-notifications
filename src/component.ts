@@ -3,6 +3,7 @@ import {NotificationBindings} from './keys';
 import {NotificationProvider} from './providers';
 import {SESBindings} from './providers/email';
 import {PubnubBindings} from './providers/push';
+import {SocketBindings} from './providers/push/socketio';
 import {SNSBindings} from './providers/sms/sns';
 
 export class NotificationsComponent implements Component {
@@ -17,5 +18,6 @@ export class NotificationsComponent implements Component {
     Binding.bind(SESBindings.Config.key).to(null),
     Binding.bind(SNSBindings.Config.key).to(null),
     Binding.bind(PubnubBindings.Config.key).to(null),
+    Binding.bind(SocketBindings.Config.key).to(null),
   ];
 }
