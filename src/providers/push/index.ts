@@ -1,2 +1,3 @@
 export * from './pubnub';
+export * from './socketio';
 export * from './types';
