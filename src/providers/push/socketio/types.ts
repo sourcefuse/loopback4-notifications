@@ -11,6 +11,10 @@ export interface SocketNotification extends PushNotification {
 
 export interface SocketMessage extends PushMessage {
   receiver: SocketReceiver;
+  /**
+   * Path represents the socket server endpoint at which we have handling for this kind of messages
+   */
+  path: string;
 }
 
 export interface SocketReceiver extends PushReceiver {
@@ -28,4 +32,8 @@ export const enum SocketSubscriberType {
 
 export interface SocketConfig {
   url: string;
+  /**
+   * Path represents the default socket server endpoint
+   */
+  defaultPath: string;
 }

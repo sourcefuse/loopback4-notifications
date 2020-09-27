@@ -284,6 +284,9 @@ this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 
 This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, just bind the PushProvider as below in application.ts.
 
+This provider sends the message to the channel passed via config (or while publishing) and accepts a fix interface to interact with.
+The interface could be imported into the project by the name SocketMessage.
+
 ```ts
 import {
   NotificationsComponent,
