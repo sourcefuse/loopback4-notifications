@@ -37,7 +37,7 @@ export class SocketIOProvider implements Provider<SocketNotification> {
               'Channel info is missing !',
             );
           }
-          await this.socketService.emit(
+          this.socketService.emit(
             message.path || this.socketConfig.defaultPath,
             JSON.stringify(message),
           );

@@ -2,6 +2,16 @@
 
 [![LoopBack](<https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sourcefuse_loopback4-notifications&metric=alert_status)](https://sonarcloud.io/dashboard?id=sourcefuse_loopback4-notifications)
+
+![Dependencies Status](https://img.shields.io/david/sourcefuse/loopback4-notifications?style=flat-square)
+![Loopback Core Version](https://img.shields.io/npm/dependency-version/loopback4-notifications/@loopback/core?style=flat-square)
+
+[![Latest version](https://img.shields.io/npm/v/loopback4-notifications.svg?style=flat-square)](https://www.npmjs.com/package/loopback4-notifications)
+[![License](https://img.shields.io/github/license/sourcefuse/loopback4-notifications.svg?color=blue&label=License&style=flat-square)](https://github.com/sourcefuse/loopback4-notifications/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/npm/dw/loopback4-notifications.svg?label=Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
+[![Total Downloads](https://img.shields.io/npm/dt/loopback4-notifications.svg?label=Total%20Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
+
 This is a loopback-next extension for adding different notification mechanisms vis-à-vis, Push, SMS, Email, to any loopback 4 based REST API application or microservice.
 
 It provides a generic provider-based framework to add your own implementation or implement any external service provider to achieve the same. There are 3 different providers available to be injected namely, PushProvider, SMSProvider and EmailProvider. It also provides support for 3 very popular external services for sending notifications.
@@ -208,7 +218,7 @@ If you wish to use any other service provider of your choice, you can create a p
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
 
-### Push Notifications
+### Push Notifications with Pubnub
 
 This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, just bind the PushProvider as below in application.ts.
 
