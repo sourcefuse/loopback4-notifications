@@ -77,7 +77,7 @@ export class FcmProvider implements Provider<FcmNotification> {
      * */
     if (receiverTokens.length >= 1) {
       const tokens = receiverTokens.map(item => item.id);
-      let msgToTransfer = {
+      const msgToTransfer = {
         tokens: tokens,
         ...generalMessageObj,
         data: {...message.options.data},
@@ -110,7 +110,7 @@ export class FcmProvider implements Provider<FcmNotification> {
       // Messages to multiple Topics is not allowed in single transaction.
 
       topics.forEach(topic => {
-        let msgToTransfer = {
+        const msgToTransfer = {
           topic: topic.id,
           ...generalMessageObj,
           data: {...message.options.data},
@@ -146,7 +146,7 @@ export class FcmProvider implements Provider<FcmNotification> {
       // Condition message
 
       conditions.forEach(condition => {
-        let msgToTransfer = {
+        const msgToTransfer = {
           condition: condition.id,
           ...generalMessageObj,
           data: {...message.options.data},
@@ -194,7 +194,7 @@ export class FcmProvider implements Provider<FcmNotification> {
          * precedence over normal notification
          *
          */
-        let generalMessageObj = {
+        const generalMessageObj = {
           notification: standardNotifForFCM,
           android: message.options.android,
           webpush: message.options.webpush,
