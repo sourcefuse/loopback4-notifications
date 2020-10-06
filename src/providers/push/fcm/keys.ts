@@ -1,8 +1,8 @@
 import {BindingKey} from '@loopback/core';
-import {FcmConfig} from './types';
+import * as admin from 'firebase-admin';
 
 export namespace FcmBindings {
-  export const Config = BindingKey.create<FcmConfig | null>(
+  export const Config = BindingKey.create<admin.app.App | null>(
     'sf.notification.config.fcm',
   );
 }

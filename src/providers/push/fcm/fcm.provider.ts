@@ -2,25 +2,17 @@ import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import * as admin from 'firebase-admin';
 import {FcmBindings} from './keys';
-import {
-  FcmConfig,
-  FcmMessage,
-  FcmNotification,
-  FcmSubscriberType,
-} from './types';
+import {FcmMessage, FcmNotification, FcmSubscriberType} from './types';
 
 export class FcmProvider implements Provider<FcmNotification> {
   constructor(
     @inject(FcmBindings.Config, {
       optional: true,
     })
-    private readonly fcmConfig?: FcmConfig,
+    private readonly fcmInstance?: admin.app.App,
   ) {
-    if (this.fcmConfig) {
-      this.fcmService = admin.initializeApp({
-        credential: admin.credential.cert(this.fcmConfig.serviceAccountPath),
-        databaseURL: this.fcmConfig.dbUrl,
-      });
+    if (this.fcmInstance) {
+      this.fcmService = this.fcmInstance;
     } else {
       throw new HttpErrors.PreconditionFailed('Firebase Config missing !');
     }
