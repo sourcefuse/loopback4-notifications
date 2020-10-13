@@ -20,6 +20,8 @@ It provides a generic provider-based framework to add your own implementation or
 2. [AWS Simple Notification Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html) - Its one of the SMSProvider for sending SMS notifications.
 3. [Pubnub](https://www.pubnub.com/docs/nodejs-javascript/pubnub-javascript-sdk) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
 4. [Socket.IO](https://socket.io/docs/) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+5. [FCM](https://firebase.google.com/docs/cloud-messaging) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+6. [Nodemailer](https://nodemailer.com/about/) - Its one of the EmailProvider for sending email messages.
 
 You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
@@ -151,6 +153,128 @@ Possible configuration options for the above are mentioned below.
 | senderEmail             | string  | This will be used as from email header in sent email.                                                                                                                  |
 
 If you wish to use any other service provider of your choice, you can create a provider for the same, similar to SesProvider we have. Add that provider in place of SesProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/email/ses/).
+
+```ts
+this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
+```
+
+### Email Notifications Using Nodemailer
+
+This extension provides in-built support of Nodemailer integration for sending emails from the application. In order to use it, just bind the NodemailerProvider as below in application.ts.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+  NodemailerProvider
+} from 'loopback4-notifications';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
+    ....
+  }
+}
+```
+
+There are some additional configurations needed in order to allow SES to connect to AWS. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+  NodemailerBindings,
+  NodemailerProvider
+} from 'loopback4-notifications';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(NodemailerBindings.Config).to({
+      pool: true,
+      maxConnections: 100,
+      url:"",
+      host: "smtp.example.com",
+      port: 80,
+      secure: false,
+      auth: {
+       user: "username",
+       pass: "password"
+      },
+      tls: {
+        rejectUnauthorized: true
+       }
+    });
+    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
+    ....
+  }
+}
+```
+
+All the configurations as specified by Nodemailer docs for SMTP transport [here](https://nodemailer.com/smtp/) are supported in above NodemailerBindings.Config key.
+
+In addition to this, some general configurations can also be done, like below.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+  NodemailerBindings,
+  NodemailerProvider
+} from 'loopback4-notifications';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.Config).to({
+      sendToMultipleReceivers: false,
+      senderEmail: 'support@myapp.com'
+    });
+    this.bind(NodemailerBindings.Config).to({
+      pool: true,
+      maxConnections: 100,
+      url:"",
+      host: "smtp.example.com",
+      port: 80,
+      secure: false,
+      auth: {
+       user: "username",
+       pass: "password"
+      },
+      tls: {
+        rejectUnauthorized: true
+       }
+    });
+    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
+    ....
+  }
+}
+```
+
+Possible configuration options for the above are mentioned below.
+
+| Option                  | Type    | Description                                                                                                                                                            |
+| ----------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| sendToMultipleReceivers | boolean | If set to true, single email will be sent to all receivers mentioned in payload. If set to false, multiple emails will be sent for each receiver mentioned in payload. |
+| senderEmail             | string  | This will be used as from email header in sent email.                                                                                                                  |
+
+If you wish to use any other service provider of your choice, you can create a provider for the same, similar to NodemailerProvider we have. Add that provider in place of NodemailerProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/email/nodemailer/).
 
 ```ts
 this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
