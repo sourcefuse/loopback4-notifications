@@ -58,8 +58,8 @@ export class NodemailerProvider implements Provider<NodemailerNotification> {
             ...message.options,
             from: fromEmail || '',
             to: receivers,
-            subject: message.options?.subject || message.subject,
-            text: message.options?.text || message.body,
+            subject: message.options?.subject ?? message.subject,
+            text: message.options?.text ?? message.body,
             html: message.options?.html,
             attachments: message.options?.attachments,
           };
@@ -70,8 +70,8 @@ export class NodemailerProvider implements Provider<NodemailerNotification> {
               ...message.options,
               from: fromEmail || '',
               to: receiver.id,
-              subject: message.options?.subject || message.subject,
-              text: message.options?.text || message.body,
+              subject: message.options?.subject ?? message.subject,
+              text: message.options?.text ?? message.body,
               html: message.options?.html,
               attachments: message.options?.attachments,
             };
