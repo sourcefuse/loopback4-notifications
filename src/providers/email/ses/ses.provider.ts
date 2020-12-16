@@ -30,8 +30,7 @@ export class SesProvider implements Provider<SESNotification> {
     return {
       publish: async (message: SESMessage) => {
         const fromEmail =
-          (message.options && message.options.fromEmail) ||
-          (this.config && this.config.senderEmail);
+          message.options?.fromEmail ?? this.config?.senderEmail;
 
         if (!fromEmail) {
           throw new HttpErrors.BadRequest(
@@ -48,7 +47,7 @@ export class SesProvider implements Provider<SESNotification> {
           throw new HttpErrors.BadRequest('Message data incomplete');
         }
 
-        if (this.config && this.config.sendToMultipleReceivers) {
+        if (this.config?.sendToMultipleReceivers) {
           const receivers = message.receiver.to.map(receiver => receiver.id);
           const emailReq: SES.SendEmailRequest = {
             Source: fromEmail || '',
