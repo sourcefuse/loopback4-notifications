@@ -41,28 +41,28 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^2.3.1",
-    "@loopback/context": "^3.8.1",
-    "@loopback/core": "^2.7.0",
-    "@loopback/rest": "^5.0.1",
+    "@loopback/boot": "^3.1.0",
+    "@loopback/context": "^3.13.0",
+    "@loopback/core": "^2.12.0",
+    "@loopback/rest": "^9.0.0",
     "@types/nodemailer": "^6.4.0",
     "firebase-admin": "^9.2.0",
     "nodemailer": "^6.4.13",
     "socket.io-client": "^2.3.0",
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "@loopback/build": "^5.4.1",
-    "@loopback/eslint-config": "^7.0.1",
-    "@loopback/testlab": "^3.1.5",
-    "@types/node": "^10.17.24",
+    "@loopback/build": "^6.2.6",
+    "@loopback/eslint-config": "^10.0.2",
+    "@loopback/testlab": "^3.2.8",
+    "@types/node": "^10.17.44",
     "@types/pubnub": "^4.27.3",
     "@types/socket.io-client": "^1.4.33",
     "aws-sdk": "^2.683.0",
-    "eslint": "^7.0.0",
+    "eslint": "^7.12.1",
     "pubnub": "^4.27.6",
     "source-map-support": "^0.5.19",
-    "typescript": "~3.9.3"
+    "typescript": "~4.0.5"
   },
   "peerDependencies": {
     "aws-sdk": "^2.683.0",
