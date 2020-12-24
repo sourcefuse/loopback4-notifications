@@ -12,7 +12,7 @@ export class SocketIOProvider implements Provider<SocketNotification> {
     private readonly socketConfig?: SocketConfig,
   ) {
     if (this.socketConfig && this.socketConfig.url) {
-      this.socketService = io(this.socketConfig.url);
+      this.socketService = io(this.socketConfig.url, socketConfig?.options);
     } else {
       throw new HttpErrors.PreconditionFailed('Socket Config missing !');
     }
