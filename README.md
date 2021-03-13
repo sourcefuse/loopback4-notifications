@@ -183,7 +183,7 @@ export class NotificationServiceApplication extends BootMixin(
 }
 ```
 
-There are some additional configurations needed in order to allow SES to connect to AWS. You need to add them as below. Make sure these are added before the provider binding.
+There are some additional configurations needed in order to allow NodeMailer to works. You need to add them as below. Make sure these are added before the provider binding.
 
 ```ts
 import {
