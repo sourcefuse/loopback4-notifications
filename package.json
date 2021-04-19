@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "@loopback/boot": "^2.3.1",
-    "@loopback/context": "^3.8.1",
+    "@loopback/context": "^3.15.0",
     "@loopback/core": "^2.7.0",
     "@loopback/rest": "^5.0.1",
     "@types/nodemailer": "^6.4.0",
