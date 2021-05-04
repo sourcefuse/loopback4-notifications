@@ -33,9 +33,7 @@ export class NodemailerProvider implements Provider<NodemailerNotification> {
   value() {
     return {
       publish: async (message: NodemailerMessage) => {
-        const fromEmail =
-          (message.options && message.options.from) ||
-          (this.config && this.config.senderEmail);
+        const fromEmail = message.options?.from ?? this.config?.senderEmail;
 
         if (!fromEmail) {
           throw new HttpErrors.BadRequest(
@@ -52,7 +50,7 @@ export class NodemailerProvider implements Provider<NodemailerNotification> {
           throw new HttpErrors.BadRequest('Message data incomplete');
         }
 
-        if (this.config && this.config.sendToMultipleReceivers) {
+        if (this.config?.sendToMultipleReceivers) {
           const receivers = message.receiver.to.map(receiver => receiver.id);
           const emailReq: Mail.Options = {
             ...message.options,
