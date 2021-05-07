@@ -34,7 +34,7 @@ export class SnsProvider implements Provider<SNSNotification> {
             Message: message.body,
             Subject: message.subject,
           };
-          if (message.options && message.options.smsType) {
+          if (message.options?.smsType) {
             msg.MessageAttributes = {
               'AWS.SNS.SMS.SMSType': {
                 DataType: 'String',
