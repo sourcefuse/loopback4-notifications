@@ -35,7 +35,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
             message: {
               title: message.subject,
               description: message.body,
-              // eslint-disable-next-line @typescript-eslint/camelcase
+              // eslint-disable-next-line @typescript-eslint/naming-convention
               pn_gcm: {
                 data: Object.assign(
                   {
@@ -45,7 +45,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
                   message.options,
                 ),
               },
-              // eslint-disable-next-line @typescript-eslint/camelcase
+              // eslint-disable-next-line @typescript-eslint/naming-convention
               pn_apns: Object.assign(
                 {
                   aps: {
@@ -55,7 +55,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
                       ? message.options.sound
                       : 'default',
                   },
-                  // eslint-disable-next-line @typescript-eslint/camelcase
+                  // eslint-disable-next-line @typescript-eslint/naming-convention
                   pn_push: [
                     {
                       targets: [
@@ -82,7 +82,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
         await Promise.all(publishes);
       },
       grantAccess: async (config: Config) => {
-        if (config.options && config.options.token && config.options.ttl) {
+        if (config.options?.token && config.options.ttl) {
           const publishConfig: Pubnub.GrantParameters = {
             authKeys: [config.options.token],
             channels: config.receiver.to.map(receiver => receiver.id),
@@ -100,7 +100,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
         );
       },
       revokeAccess: async (config: Config) => {
-        if (config.options && config.options.token) {
+        if (config.options?.token) {
           const publishConfig: Pubnub.GrantParameters = {
             channels: config.receiver.to.map(receiver => receiver.id),
             authKeys: [config.options.token],
