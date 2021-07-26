@@ -2,9 +2,8 @@ import {BindingKey} from '@loopback/core';
 import {INotification, INotificationConfig} from './types';
 
 export namespace NotificationBindings {
-  export const NotificationProvider = BindingKey.create<INotification>(
-    'sf.notification',
-  );
+  export const NotificationProvider =
+    BindingKey.create<INotification>('sf.notification');
   export const SMSProvider = BindingKey.create<INotification>(
     'sf.notification.sms',
   );
