@@ -3,3 +3,5 @@ dist/
 coverage/
 
 .eslintrc.js
+.cz-config.js
+commitlint.config.js
