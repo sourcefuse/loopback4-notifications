@@ -1,17 +1,24 @@
-import {expect} from '@loopback/testlab';
+import {Constructor} from '@loopback/core';
+import {expect, sinon} from '@loopback/testlab';
+import proxyquire from 'proxyquire';
 import {SESMessage, SesProvider} from '../../providers';
 
 describe('Ses Service', () => {
+  let SesMockProvider: Constructor<SesProvider>;
+  beforeEach(setUpMockSES);
   describe('ses configration addition', () => {
+    const sesConfig = {
+      accessKeyId: '',
+      secretAccessKey: '',
+      region: 'us-east-1',
+    };
+
     it('returns error message on having no sender', async () => {
       const Config = {
         sendToMultipleReceivers: false,
       };
-      const sesConfig = {
-        apiVersion: 'test',
-      };
+      const sesProvider = new SesMockProvider(Config, sesConfig).value();
 
-      const sesProvider = new SesProvider(Config, sesConfig).value();
       const message: SESMessage = {
         receiver: {
           to: [],
@@ -31,11 +38,8 @@ describe('Ses Service', () => {
         sendToMultipleReceivers: false,
         senderEmail: 'test@test.com',
       };
-      const sesConfig = {
-        apiVersion: 'test',
-      };
 
-      const sesProvider = new SesProvider(Config, sesConfig).value();
+      const sesProvider = new SesMockProvider(Config, sesConfig).value();
       const message: SESMessage = {
         receiver: {
           to: [],
@@ -55,11 +59,8 @@ describe('Ses Service', () => {
         sendToMultipleReceivers: false,
         senderEmail: 'test@test.com',
       };
-      const sesConfig = {
-        apiVersion: 'test',
-      };
 
-      const sesProvider = new SesProvider(Config, sesConfig).value();
+      const sesProvider = new SesMockProvider(Config, sesConfig).value();
       const message: SESMessage = {
         receiver: {
           to: [
@@ -81,24 +82,20 @@ describe('Ses Service', () => {
     it('returns error message when no ses config', async () => {
       try {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const sesProvider = new SesProvider();
+        const sesProvider = new SesMockProvider();
       } catch (err) {
         const result = err.message;
         expect(result).which.eql('AWS SES Config missing !');
       }
     });
 
-    it('returns region missing in configration for single user', async () => {
+    it('returns a Promise after sending message to individual user', async () => {
       const Config = {
         sendToMultipleReceivers: false,
         senderEmail: 'test@gmail.com',
-        fromEmail: 'dummy@gmail.com',
-      };
-      const sesConfig = {
-        apiVersion: 'test',
       };
 
-      const sesProvider = new SesProvider(Config, sesConfig).value();
+      const sesProvider = new SesMockProvider(Config, sesConfig).value();
       const message: SESMessage = {
         receiver: {
           to: [
@@ -112,23 +109,16 @@ describe('Ses Service', () => {
         type: 0,
         subject: 'test',
       };
-      const result = await sesProvider
-        .publish(message)
-        .catch(err => err.message);
-      expect(result).which.eql('Missing region in config');
-    }).timeout(1000000);
+      const result = sesProvider.publish(message);
+      await expect(result).to.be.fulfilled();
+    });
 
-    it('returns region missing in configration for multiple user', async () => {
+    it('returns a Promise after sending message to multiple user', async () => {
       const Config = {
         sendToMultipleReceivers: true,
         senderEmail: 'test@gmail.com',
-        fromEmail: 'dummy@gmail.com',
       };
-      const sesConfig = {
-        apiVersion: 'test',
-      };
-
-      const sesProvider = new SesProvider(Config, sesConfig).value();
+      const sesProvider = new SesMockProvider(Config, sesConfig).value();
       const message: SESMessage = {
         receiver: {
           to: [
@@ -142,10 +132,20 @@ describe('Ses Service', () => {
         type: 0,
         subject: 'test',
       };
-      const result = await sesProvider
-        .publish(message)
-        .catch(err => err.message);
-      expect(result).which.eql('Missing region in config');
-    }).timeout(1000000);
+      const result = sesProvider.publish(message);
+      await expect(result).to.be.fulfilled();
+    });
   });
+
+  function setUpMockSES() {
+    const mockSES = sinon.stub();
+    mockSES.prototype.sendEmail = sinon
+      .stub()
+      .returns({promise: () => Promise.resolve()});
+    SesMockProvider = proxyquire('../../providers/email/ses/ses.provider', {
+      'aws-sdk': {
+        SES: mockSES,
+      },
+    }).SesProvider;
+  }
 });

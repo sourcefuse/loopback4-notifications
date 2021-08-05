@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {expect} from '@loopback/testlab';
+import {Constructor} from '@loopback/core';
+import {expect, sinon} from '@loopback/testlab';
+import proxyquire from 'proxyquire';
 import {SNSMessage, SnsProvider} from '../../providers';
 
 describe('Sns Service', () => {
@@ -28,12 +29,16 @@ describe('Sns Service', () => {
   };
   const configration = {
     apiVersion: 'test',
+    accessKeyId: '',
+    secretAccessKey: '',
+    region: 'us-east-1',
   };
 
-  const snsProvider = new SnsProvider(configration).value();
-
+  let SnsProviderMock: Constructor<SnsProvider>;
+  beforeEach(setupMockSNS);
   describe('sns configration addition', () => {
     it('returns error message on passing reciever length as zero', async () => {
+      const snsProvider = new SnsProviderMock(configration).value();
       const result = await snsProvider
         .publish(message)
         .catch(err => err.message);
@@ -42,7 +47,7 @@ describe('Sns Service', () => {
 
     it('returns error message when no sns config', async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         const snsProvider = new SnsProvider();
       } catch (err) {
         const result = err.message;
@@ -51,10 +56,21 @@ describe('Sns Service', () => {
     });
 
     it('returns the message', async () => {
-      const result = await snsProvider
-        .publish(message1)
-        .catch(err => err.message);
-      expect(result).which.eql('Missing region in config');
-    }).timeout(1000000);
+      const snsProvider = new SnsProviderMock(configration).value();
+      const result = snsProvider.publish(message1);
+      await expect(result).to.be.fulfilled();
+    });
   });
+
+  function setupMockSNS() {
+    const mockSNS = sinon.stub();
+    mockSNS.prototype.publish = sinon
+      .stub()
+      .returns({promise: () => Promise.resolve()});
+    SnsProviderMock = proxyquire('../../providers/sms/sns/sns.provider', {
+      'aws-sdk': {
+        SNS: mockSNS,
+      },
+    }).SnsProvider;
+  }
 });

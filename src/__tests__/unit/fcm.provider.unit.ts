@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-shadow */
 import {expect} from '@loopback/testlab';
 import * as admin from 'firebase-admin';
@@ -11,6 +10,7 @@ describe('FCM Service', () => {
   describe('fcm configration addition', () => {
     it('returns error message when no firebase config', async () => {
       try {
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         const fcmProvider = new FcmProvider();
       } catch (err) {
         const result = err.message;
@@ -128,7 +128,7 @@ describe('FCM Service', () => {
         generalMessageObj,
       );
       expect(result).which.eql([]);
-    }).timeout(1000000);
+    }).timeout(5000);
 
     it('returns array for sending push to receive tokens', async () => {
       const message: FcmMessage = {
@@ -158,7 +158,7 @@ describe('FCM Service', () => {
         generalMessageObj,
       );
       expect(result).to.have.Array();
-    }).timeout(1000000);
+    }).timeout(5000);
 
     it('returns array for sending push to topics', async () => {
       const message: FcmMessage = {
@@ -188,7 +188,7 @@ describe('FCM Service', () => {
         generalMessageObj,
       );
       expect(result).which.eql([]);
-    }).timeout(1000000);
+    }).timeout(5000);
 
     it('returns array for sending in value function', async () => {
       const message: FcmMessage = {
@@ -208,6 +208,6 @@ describe('FCM Service', () => {
       };
       const result = fcmProvider.value().publish(message);
       expect(result).to.have.Promise();
-    }).timeout(1000000);
+    }).timeout(5000);
   });
 });
