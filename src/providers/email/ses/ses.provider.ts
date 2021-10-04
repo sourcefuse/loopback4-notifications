@@ -1,8 +1,9 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import {SES} from 'aws-sdk';
 import {NotificationBindings} from '../../../keys';
 import {INotificationConfig} from '../../../types';
+import {SES} from '../../../types/aws-sdk';
+import {loadDynamic} from '../../dynamic-loader';
 import {SESBindings} from './keys';
 import {SESMessage, SESNotification} from './types';
 
@@ -16,17 +17,31 @@ export class SesProvider implements Provider<SESNotification> {
       optional: true,
     })
     private readonly sesConfig?: SES.Types.ClientConfiguration,
-  ) {
-    if (this.sesConfig) {
-      this.sesService = new SES(this.sesConfig);
-    } else {
-      throw new HttpErrors.PreconditionFailed('AWS SES Config missing !');
-    }
-  }
+  ) {}
 
   sesService: SES;
 
-  value() {
+  async value() {
+    const AWS = await loadDynamic('aws-sdk');
+    const errorMessage =
+      'Cannot use Amazon SES service!' +
+      '\n' +
+      'Please install aws-sdk before using this service.' +
+      '\n' +
+      'Run `npm install --save aws-sdk` to install AWS SDK.';
+
+    if (!AWS) {
+      console.error(errorMessage);
+      return {
+        publish: async (message: SESMessage) => {
+          console.error(errorMessage);
+          throw new HttpErrors.ServiceUnavailable('Email service unavailable');
+        },
+      };
+    } else {
+      this.sesService = new AWS.SES(this.sesConfig);
+    }
+
     return {
       publish: async (message: SESMessage) => {
         const fromEmail =

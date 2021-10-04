@@ -1,6 +1,7 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import {SNS} from 'aws-sdk';
+import {SNS} from '../../../types/aws-sdk';
+import {loadDynamic} from '../../dynamic-loader';
 import {SNSBindings} from './keys';
 import {SNSMessage, SNSNotification, SNSSubscriberType} from './types';
 
@@ -10,17 +11,31 @@ export class SnsProvider implements Provider<SNSNotification> {
       optional: true,
     })
     private readonly snsConfig?: SNS.ClientConfiguration,
-  ) {
-    if (this.snsConfig) {
-      this.snsService = new SNS(this.snsConfig);
-    } else {
-      throw new HttpErrors.PreconditionFailed('AWS SNS Config missing !');
-    }
-  }
+  ) {}
 
   snsService: SNS;
 
-  value() {
+  async value() {
+    const AWS = await loadDynamic('aws-sdk');
+    const errorMessage =
+      'Cannot use Amazon SNS service!' +
+      '\n' +
+      'Please install aws-sdk before using this service.' +
+      '\n' +
+      'Run `npm install --save aws-sdk` to install AWS SDK.';
+
+    if (!AWS) {
+      console.error(errorMessage);
+      return {
+        publish: async (message: SNSMessage) => {
+          console.error(errorMessage);
+          throw new HttpErrors.ServiceUnavailable('SMS service unavailable');
+        },
+      };
+    } else {
+      this.snsService = new AWS.SES(this.snsConfig);
+    }
+
     return {
       publish: async (message: SNSMessage) => {
         if (message.receiver.to.length === 0) {

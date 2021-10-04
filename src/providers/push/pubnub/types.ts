@@ -1,5 +1,6 @@
-import Pubnub from 'pubnub';
+// import Pubnub from 'pubnub';
 import {Config} from '../../../types';
+import {PubnubConfig} from '../../../types/pubnub';
 import {
   PushMessage,
   PushNotification,
@@ -43,4 +44,6 @@ export interface PubnubAPNSConfig {
   apns2BundleId?: string;
 }
 
-export type PubnubConfig = PubnubAPNSConfig & Pubnub.PubnubConfig;
+type PubnubConfigWithAPNS = PubnubAPNSConfig & PubnubConfig;
+
+export {PubnubConfigWithAPNS as PubnubConfig};

@@ -1,7 +1,8 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import Pubnub from 'pubnub';
 import {Config} from '../../../types';
+import Pubnub from '../../../types/pubnub';
+import {loadDynamic} from '../../dynamic-loader';
 import {PubnubBindings} from './keys';
 import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
 
@@ -11,17 +12,37 @@ export class PubNubProvider implements Provider<PubNubNotification> {
       optional: true,
     })
     private readonly pnConfig?: Pubnub.PubnubConfig,
-  ) {
-    if (this.pnConfig) {
-      this.pubnubService = new Pubnub(this.pnConfig);
-    } else {
-      throw new HttpErrors.PreconditionFailed('Pubnub Config missing !');
-    }
-  }
+  ) {}
 
   pubnubService: Pubnub;
 
-  value() {
+  async value() {
+    const pubnub = await loadDynamic('pubnub');
+    const errorMessage =
+      'Cannot use PubNub service!' +
+      '\n' +
+      'Please install pubnub before using this service.' +
+      '\n' +
+      'Run `npm install --save pubnub` to install AWS SDK.';
+
+    if (!pubnub) {
+      console.error(errorMessage);
+      return {
+        publish: async (message: PubNubMessage) => {
+          console.error(errorMessage);
+          throw new HttpErrors.ServiceUnavailable('PubNub service unavailable');
+        },
+        grantAccess: async (config: Config) => {
+          return {};
+        },
+        revokeAccess: async (config: Config) => {
+          return {};
+        },
+      };
+    } else {
+      this.pubnubService = new pubnub(this.pnConfig);
+    }
+
     return {
       publish: async (message: PubNubMessage) => {
         if (message.receiver.to.length === 0) {
