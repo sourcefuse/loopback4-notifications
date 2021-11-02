@@ -1,3 +1,5 @@
+import {PubnubMessageType} from './providers/push/pubnub/types';
+
 export interface INotification {
   publish(message: Message): Promise<void>;
 }
@@ -14,6 +16,7 @@ export interface Message {
   sentDate: Date;
   type: MessageType;
   options?: MessageOptions;
+  payload?: PubnubMessageType;
 }
 
 export interface Config {

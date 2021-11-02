@@ -44,3 +44,8 @@ export interface PubnubAPNSConfig {
 }
 
 export type PubnubConfig = PubnubAPNSConfig & Pubnub.PubnubConfig;
+
+export const enum PubnubMessageType {
+  data = 'data',
+  notification = 'notification',
+}

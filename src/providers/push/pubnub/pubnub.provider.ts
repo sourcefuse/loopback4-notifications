@@ -3,7 +3,7 @@ import {HttpErrors} from '@loopback/rest';
 import Pubnub from 'pubnub';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
-import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
+import {PubNubMessage, PubnubMessageType, PubNubNotification, PubNubSubscriberType} from './types';
 
 export class PubNubProvider implements Provider<PubNubNotification> {
   constructor(
@@ -36,7 +36,24 @@ export class PubNubProvider implements Provider<PubNubNotification> {
               title: message.subject,
               description: message.body,
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              pn_gcm: {
+              pn_gcm: message.payload === PubnubMessageType.notification ? {
+                data: Object.assign(
+                  {
+                    title: message.subject,
+                    description: message.body,
+                  },
+                  message.options,
+                ),
+                notification: Object.assign(
+                  {
+                    title: message.subject,
+                    body: message.body,
+                  },
+                  message.options,
+                ),
+              } :
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              {
                 data: Object.assign(
                   {
                     title: message.subject,
