@@ -3,7 +3,12 @@ import {HttpErrors} from '@loopback/rest';
 import Pubnub from 'pubnub';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
-import {PubNubMessage, PubnubMessageType, PubNubNotification, PubNubSubscriberType} from './types';
+import {
+  PubNubMessage,
+  PubnubMessageType,
+  PubNubNotification,
+  PubNubSubscriberType,
+} from './types';
 
 export class PubNubProvider implements Provider<PubNubNotification> {
   constructor(
@@ -36,57 +41,34 @@ export class PubNubProvider implements Provider<PubNubNotification> {
               title: message.subject,
               description: message.body,
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              pn_gcm: message.payload === PubnubMessageType.notification ? {
-                data: Object.assign(
-                  {
-                    title: message.subject,
-                    description: message.body,
-                  },
-                  message.options,
-                ),
-                notification: Object.assign(
-                  {
-                    title: message.subject,
-                    body: message.body,
-                  },
-                  message.options,
-                ),
-              } :
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              {
-                data: Object.assign(
-                  {
-                    title: message.subject,
-                    description: message.body,
-                    icon: message.options,
-                    color: message.options,
-                    sound: message.options,
-                    tag: message.options,
-                    badge: message.options,
-                    clickAction: message.options,
-                    bodyLocKey: message.options,
-                    bodyLocArgs: message.options,
-                    titleLocKey: message.options,
-                    titleLocArgs: message.options,
-                    channelId: message.options,
-                    ticker: message.options,
-                    vibrateTimings: message.options,
-                    image: message.options,
-                    priority: message.options,
-                    sticky: message.options,
-                    eventTime: message.options,
-                    localOnly: message.options,
-                    notificationPriority: message.options,
-                    defaultSound: message.options,
-                    defaultVibrateTimings: message.options,
-                    defaultLightSettings: message.options,
-                    visibility: message.options,
-                    notificationCount: message.options,
-                    lightSettings: message.options,
-                  },
-                  message.options,
-                ),
-              },
+              pn_gcm:
+                message.payload === PubnubMessageType.notification
+                  ? {
+                      data: Object.assign(
+                        {
+                          title: message.subject,
+                          description: message.body,
+                        },
+                        message.options,
+                      ),
+                      notification: Object.assign(
+                        {
+                          title: message.subject,
+                          body: message.body,
+                        },
+                        message.options,
+                      ),
+                    }
+                  : // eslint-disable-next-line @typescript-eslint/naming-convention
+                    {
+                      data: Object.assign(
+                        {
+                          title: message.subject,
+                          description: message.body,
+                        },
+                        message.options,
+                      ),
+                    },
               // eslint-disable-next-line @typescript-eslint/naming-convention
               pn_apns: Object.assign(
                 {
