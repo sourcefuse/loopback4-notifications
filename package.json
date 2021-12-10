@@ -75,7 +75,7 @@
     "nyc": "^15.1.0",
     "pubnub": "^4.33.1",
     "semantic-release": "^17.4.4",
-    "socket.io-client": "^4.0.2",
+    "socket.io-client": "^4.4.0",
     "source-map-support": "^0.5.20",
     "typescript": "~4.4.4"
   },
