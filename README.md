@@ -4,7 +4,6 @@
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sourcefuse_loopback4-notifications&metric=alert_status)](https://sonarcloud.io/dashboard?id=sourcefuse_loopback4-notifications)
 
-![Dependencies Status](https://img.shields.io/david/sourcefuse/loopback4-notifications?style=flat-square)
 ![Loopback Core Version](https://img.shields.io/npm/dependency-version/loopback4-notifications/@loopback/core?style=flat-square)
 
 [![Latest version](https://img.shields.io/npm/v/loopback4-notifications.svg?style=flat-square)](https://www.npmjs.com/package/loopback4-notifications)
