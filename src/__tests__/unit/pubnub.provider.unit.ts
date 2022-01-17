@@ -21,6 +21,7 @@ describe('Pubnub Service', () => {
         sentDate: new Date(),
         type: 0,
       };
+
       const result = await pubnubProvider
         .publish(message)
         .catch(err => err.message);

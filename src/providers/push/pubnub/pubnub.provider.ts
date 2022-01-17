@@ -1,9 +1,15 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import Pubnub from 'pubnub';
+import {Aps, MessageConfig, PnApns, TargetsType} from '.';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
-import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
+import {
+  PnGcm,
+  PubNubMessage,
+  PubNubNotification,
+  PubNubSubscriberType,
+} from './types';
 
 export class PubNubProvider implements Provider<PubNubNotification> {
   constructor(
@@ -20,6 +26,56 @@ export class PubNubProvider implements Provider<PubNubNotification> {
   }
 
   pubnubService: Pubnub;
+  getGeneralMessageObject(message: PubNubMessage) {
+    const commonDataNotification: MessageConfig = Object.assign(
+      {
+        title: message.subject,
+        description: message.body,
+      },
+      message.options,
+    );
+    const pnGcm: PnGcm = {
+      data: commonDataNotification,
+      notification: commonDataNotification,
+    };
+    const apsData: Aps = {
+      alert: commonDataNotification,
+      key: message.subject,
+      sound: message?.options?.sound ? message.options.sound : 'default',
+    };
+    const targetTypeData: TargetsType[] = [
+      {
+        targets: [
+          {
+            environment: process.env.PUBNUB_APNS2_ENV,
+            topic: process.env.PUBNUB_APNS2_BUNDLE_ID,
+          },
+        ],
+        version: 'v2',
+      },
+    ];
+    const pnApns: PnApns = {
+      aps: apsData,
+      pnPush: targetTypeData,
+    };
+    // const generalMessageObj = {
+    //   pn_gcm: pn_gcm,
+    //   pn_apns: Object.assign(pn_apns, message.options),
+    // };
+    return {pnGcm: pnGcm, pnApns: Object.assign(pnApns, message.options)};
+  }
+  getPublishConfig(message: PubNubMessage) {
+    const generalMessageObj = this.getGeneralMessageObject(message);
+    const publishConfig: Pubnub.PublishParameters = {
+      channel: '',
+      message: {
+        title: message.subject,
+        description: message.body,
+      },
+      ...generalMessageObj,
+    };
+    return publishConfig;
+  }
 
   value() {
     return {
@@ -29,49 +85,8 @@ export class PubNubProvider implements Provider<PubNubNotification> {
             'Message receiver not found in request',
           );
         }
+        const publishConfig = this.getPublishConfig(message);
         const publishes = message.receiver.to.map(receiver => {
-          const publishConfig: Pubnub.PublishParameters = {
-            channel: '',
-            message: {
-              title: message.subject,
-              description: message.body,
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              pn_gcm: {
-                data: Object.assign(
-                  {
-                    title: message.subject,
-                    description: message.body,
-                  },
-                  message.options,
-                ),
-              },
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              pn_apns: Object.assign(
-                {
-                  aps: {
-                    alert: message.body,
-                    key: message.subject,
-                    sound: message?.options?.sound
-                      ? message.options.sound
-                      : 'default',
-                  },
-                  // eslint-disable-next-line @typescript-eslint/naming-convention
-                  pn_push: [
-                    {
-                      targets: [
-                        {
-                          environment: process.env.PUBNUB_APNS2_ENV,
-                          topic: process.env.PUBNUB_APNS2_BUNDLE_ID,
-                        },
-                      ],
-                      version: 'v2',
-                    },
-                  ],
-                },
-                message.options,
-              ),
-            },
-          };
           if (receiver.type === PubNubSubscriberType.Channel) {
             publishConfig.channel = receiver.id;
           }
