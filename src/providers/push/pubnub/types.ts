@@ -1,5 +1,4 @@
 import Pubnub from 'pubnub';
-
 import {Config} from '../../../types';
 import {
   PushMessage,
@@ -45,8 +44,8 @@ export interface PubnubAPNSConfig {
 }
 
 export interface PnGcm {
-  data: MessageConfig;
-  notification: MessageConfig;
+  data?: MessageConfig;
+  notification?: MessageConfig;
 }
 
 export interface PnApns {
