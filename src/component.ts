@@ -1,10 +1,10 @@
 import {Binding, Component, ProviderMap} from '@loopback/core';
 import {NotificationBindings} from './keys';
-import {NotificationProvider} from './providers';
-import {SESBindings} from './providers/email';
-import {PubnubBindings} from './providers/push';
-import {SocketBindings} from './providers/push/socketio';
-import {SNSBindings} from './providers/sms/sns';
+import {SESBindings} from './providers/email/ses/keys';
+import {NotificationProvider} from './providers/notification.provider';
+import {PubnubBindings} from './providers/push/pubnub/keys';
+import {SocketBindings} from './providers/push/socketio/keys';
+import {SNSBindings} from './providers/sms/sns/keys';
 
 export class NotificationsComponent implements Component {
   constructor() {}

@@ -57,15 +57,18 @@ After the above, you need to configure one of the notification provider at least
 
 ### Email Notifications
 
-This extension provides in-built support of AWS Simple Email Service integration for sending emails from the application. In order to use it, just bind the SesProvider as below in application.ts.
+This extension provides in-built support of AWS Simple Email Service integration for sending emails from the application. In order to use it, run `npm install aws-sdk`, and then bind the SesProvider as below in application.ts.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
-  SesProvider
 } from 'loopback4-notifications';
+import {
+  SesProvider
+} from 'loopback-notifications/ses';
 ....
+
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -86,9 +89,11 @@ There are some additional configurations needed in order to allow SES to connect
 import {
   NotificationsComponent,
   NotificationBindings,
-  SESBindings,
-  SesProvider
 } from 'loopback4-notifications';
+import {
+  SesProvider,
+  SESBindings,
+} from 'loopback-notifications/ses';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -117,9 +122,11 @@ In addition to this, some general configurations can also be done, like below.
 import {
   NotificationsComponent,
   NotificationBindings,
-  SESBindings,
-  SesProvider
 } from 'loopback4-notifications';
+import {
+  SesProvider,
+  SESBindings,
+} from 'loopback-notifications/ses';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -159,14 +166,16 @@ this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
 
 ### Email Notifications Using Nodemailer
 
-This extension provides in-built support of Nodemailer integration for sending emails from the application. In order to use it, just bind the NodemailerProvider as below in application.ts.
+This extension provides in-built support of Nodemailer integration for sending emails from the application. In order to use it, run `npm install nodemailer`, and then bind the NodemailerProvider as below in application.ts.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
-  NodemailerProvider
 } from 'loopback4-notifications';
+import {
+  NodemailerProvider
+} from 'loopback4-notifications/nodemailer';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -188,9 +197,11 @@ There are some additional configurations needed in order to allow NodeMailer to 
 import {
   NotificationsComponent,
   NotificationBindings,
-  NodemailerBindings,
-  NodemailerProvider
 } from 'loopback4-notifications';
+import {
+  NodemailerProvider,
+  NodemailerBindings,
+} from 'loopback4-notifications/nodemailer';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -229,9 +240,11 @@ In addition to this, some general configurations can also be done, like below.
 import {
   NotificationsComponent,
   NotificationBindings,
-  NodemailerBindings,
-  NodemailerProvider
 } from 'loopback4-notifications';
+import {
+  NodemailerProvider,
+  NodemailerBindings,
+} from 'loopback4-notifications/nodemailer';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -281,14 +294,16 @@ this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
 
 ### SMS Notifications
 
-This extension provides in-built support of AWS Simple Notification Service integration for sending SMS from the application. In order to use it, just bind the SnsProvider as below in application.ts.
+This extension provides in-built support of AWS Simple Notification Service integration for sending SMS from the application. In order to use it, run `npm install aws-sdk`, and then bind the SnsProvider as below in application.ts.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
-  SnsProvider
 } from 'loopback4-notifications';
+import {
+  SnsProvider
+} from 'loopback4-notification/sns';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -310,9 +325,11 @@ There are some additional configurations needed in order to allow SNS to connect
 import {
   NotificationsComponent,
   NotificationBindings,
+} from 'loopback4-notifications';
+import {
   SNSBindings,
   SnsProvider
-} from 'loopback4-notifications';
+} from 'loopback4-notification/sns';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -343,14 +360,16 @@ this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 
 ### Push Notifications with Pubnub
 
-This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, just bind the PushProvider as below in application.ts.
+This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, run `npm install pubnub`, and then bind the PushProvider as below in application.ts.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
-  PubNubProvider
 } from 'loopback4-notifications';
+import {
+  PubNubProvider
+} from 'loopback4-notifications/pubnub';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -372,9 +391,11 @@ There are some additional configurations needed in order to allow Pubnub connect
 import {
   NotificationsComponent,
   NotificationBindings,
+} from 'loopback4-notifications';
+import {
   PubnubBindings,
   PubNubProvider
-} from 'loopback4-notifications';
+} from 'loopback4-notifications/pubnub';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -415,7 +436,7 @@ this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 
 ### Push Notifications With Socket.io
 
-This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, just bind the PushProvider as below in application.ts.
+This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, run `npm install socket.io-client`, and  bind the PushProvider as below in application.ts.
 
 This provider sends the message to the channel passed via config (or while publishing) and accepts a fix interface to interact with.
 The interface could be imported into the project by the name SocketMessage.
@@ -424,8 +445,10 @@ The interface could be imported into the project by the name SocketMessage.
 import {
   NotificationsComponent,
   NotificationBindings,
-  SocketIOProvider
 } from 'loopback4-notifications';
+import {
+  SocketIOProvider
+} from 'loopback4-notifications/socketio';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
@@ -447,9 +470,11 @@ There are some additional configurations needed in order to allow Socket connect
 import {
   NotificationsComponent,
   NotificationBindings,
+} from 'loopback4-notifications';
+import {
   SocketBindings,
   SocketIOProvider
-} from 'loopback4-notifications';
+} from 'loopback4-notifications/socketio';
 ....
 
 export class NotificationServiceApplication extends BootMixin(
