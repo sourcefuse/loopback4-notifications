@@ -28,8 +28,7 @@
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
     "prepublishOnly": "npm run test && npm run lint",
     "prepare": "husky install",
-    "coverage": "nyc npm run test",
-    "start": "node -r source-map-support/register ."
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",

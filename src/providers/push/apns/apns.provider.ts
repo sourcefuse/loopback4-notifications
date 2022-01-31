@@ -25,9 +25,13 @@ export class ApnsProvider implements Provider<any> {
   }
   apnsService: apns.Provider;
   initialValidations(message: ApnsMessage) {
-    if (message.receiver.to.length === 0 && !message.options.topic) {
+    if (
+      !message.receiver.to.length &&
+      !message.options.topic &&
+      message.options.messageFrom
+    ) {
       throw new HttpErrors.BadRequest(
-        'Message receiver, topic not found in request !',
+        'Message receiver, topic and message From not found in request !',
       );
     }
 
@@ -43,11 +47,11 @@ export class ApnsProvider implements Provider<any> {
   getMainNote(message: ApnsMessage) {
     const note = new apns.Notification();
     note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-    note.badge = 3;
+    note.badge = message.options.badge ?? '3';
     note.alert = message.body;
-    note.payload = {messageFrom: 'app'};
+    note.payload = {messageFrom: message.options.messageFrom};
     // The topic is usually the bundle identifier of your application.
-    note.topic = '<bundle identifier>';
+    note.topic = message.options.topic;
     return note;
   }
   async sendingPushToReceiverTokens(message: ApnsMessage): Promise<void> {
@@ -56,9 +60,7 @@ export class ApnsProvider implements Provider<any> {
     );
     if (receiverTokens.length >= 1) {
       const tokens = receiverTokens.map(item => item.id);
-      await this.apnsService
-        .send(this.getMainNote(message), tokens)
-        .then(result => {});
+      await this.apnsService.send(this.getMainNote(message), tokens);
     }
   }
   value() {
