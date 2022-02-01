@@ -1,11 +1,21 @@
+import {ProviderOptions} from 'node-apn';
 import {
   PushMessage,
   PushNotification,
   PushReceiver,
   PushSubscriber,
 } from '../types';
+
 export interface ApnsNotification extends PushNotification {
   publish(message: ApnsMessage): Promise<void>;
+}
+export interface ApnsConfigType {
+  providerOptions: ProviderOptions;
+
+  options: {
+    badge?: number;
+    topic: string;
+  };
 }
 
 export interface ApnsMessage extends PushMessage {

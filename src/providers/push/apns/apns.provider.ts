@@ -1,8 +1,8 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import apns, {ProviderOptions} from 'node-apn';
+import apns from 'node-apn';
 import {ApnsBinding} from './keys';
-import {ApnsMessage, ApnsSubscriberType} from './types';
+import {ApnsConfigType, ApnsMessage, ApnsSubscriberType} from './types';
 // sonarignore:start
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class ApnsProvider implements Provider<any> {
@@ -11,11 +11,14 @@ export class ApnsProvider implements Provider<any> {
     @inject(ApnsBinding.Config, {
       optional: true,
     })
-    private readonly apnsConfig?: ProviderOptions,
+    private readonly apnsConfig?: ApnsConfigType,
   ) {
     if (this.apnsConfig) {
       try {
-        this.apnsService = new apns.Provider(this.apnsConfig);
+        if (!this.apnsConfig.options.topic) {
+          throw new HttpErrors.PreconditionFailed('Topic missing !');
+        }
+        this.apnsService = new apns.Provider(this.apnsConfig.providerOptions);
       } catch (err) {
         throw new HttpErrors.PreconditionFailed(err);
       }
@@ -25,13 +28,12 @@ export class ApnsProvider implements Provider<any> {
   }
   apnsService: apns.Provider;
   initialValidations(message: ApnsMessage) {
-    if (
-      !message.receiver.to.length &&
-      !message.options.topic &&
-      message.options.messageFrom
-    ) {
+    if (!!message.options.messageFrom) {
+      throw new HttpErrors.BadRequest('Message From not found in request !');
+    }
+    if (!message.receiver.to.length) {
       throw new HttpErrors.BadRequest(
-        'Message receiver, topic and message From not found in request !',
+        'Message receiver not found in request !',
       );
     }
 
@@ -47,11 +49,11 @@ export class ApnsProvider implements Provider<any> {
   getMainNote(message: ApnsMessage) {
     const note = new apns.Notification();
     note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-    note.badge = message.options.badge ?? '3';
+    note.badge = this.apnsConfig?.options.badge ?? 3;
     note.alert = message.body;
     note.payload = {messageFrom: message.options.messageFrom};
     // The topic is usually the bundle identifier of your application.
-    note.topic = message.options.topic;
+    note.topic = String(this.apnsConfig?.options.topic);
     return note;
   }
   async sendingPushToReceiverTokens(message: ApnsMessage): Promise<void> {
