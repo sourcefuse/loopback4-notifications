@@ -17,6 +17,11 @@ export interface PubNubMessage extends PushMessage {
   receiver: PubNubReceiver;
 }
 
+export enum PayloadType {
+  Data,
+  Notification,
+}
+
 export interface PubNubGrantRequest extends Config {
   receiver: PubNubReceiver;
   options?: {
