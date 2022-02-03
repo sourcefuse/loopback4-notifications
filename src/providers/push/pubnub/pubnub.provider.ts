@@ -69,8 +69,8 @@ export class PubNubProvider implements Provider<PubNubNotification> {
       message: {
         title: message.subject,
         description: message.body,
+        ...generalMessageObj,
       },
-      ...generalMessageObj,
     };
     return publishConfig;
   }
