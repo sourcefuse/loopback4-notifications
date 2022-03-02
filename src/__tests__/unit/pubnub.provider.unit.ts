@@ -8,6 +8,7 @@ import {Config} from '../../types';
 describe('Pubnub Service', () => {
   let PubnubProviderMock: Constructor<PubNubProvider>;
   const pubnubConfig: PubnubConfig = {
+    uuid:'1',
     subscribeKey: 'test',
   };
   beforeEach(setupMockPubnub);
