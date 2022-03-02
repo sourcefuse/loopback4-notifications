@@ -8,7 +8,7 @@ describe('FCM Service', () => {
   const fcmProvider = new FcmProvider(app);
 
   describe('fcm configration addition', () => {
-    it('returns error message when no firebase config', async () => {
+    it('returns error message when no firebase config', () => {
       try {
         /* eslint-disable @typescript-eslint/no-unused-vars */
         const fcmProvider = new FcmProvider();
@@ -18,7 +18,7 @@ describe('FCM Service', () => {
       }
     });
 
-    it('returns error message on passing reciever length as zero', async () => {
+    it('returns error message on passing reciever length as zero', () => {
       const message: FcmMessage = {
         receiver: {
           to: [],
@@ -37,7 +37,7 @@ describe('FCM Service', () => {
       }
     });
 
-    it('returns error message on passing reciever length as zero in value function', async () => {
+    it('returns error message on passing reciever length as zero in value function', () => {
       const message: FcmMessage = {
         receiver: {
           to: [],
@@ -56,7 +56,7 @@ describe('FCM Service', () => {
       }
     });
 
-    it('returns error message on having no message subject', async () => {
+    it('returns error message on having no message subject', () => {
       const message: FcmMessage = {
         receiver: {
           to: [
@@ -78,7 +78,7 @@ describe('FCM Service', () => {
       }
     });
 
-    it('returns error message on having no message subject using value function', async () => {
+    it('returns error message on having no message subject using value function', () => {
       const message: FcmMessage = {
         receiver: {
           to: [
@@ -100,7 +100,7 @@ describe('FCM Service', () => {
       }
     });
 
-    it('returns array for sending push to conditions', async () => {
+    it('returns array for sending push to conditions', () => {
       const message: FcmMessage = {
         receiver: {
           to: [
@@ -130,7 +130,7 @@ describe('FCM Service', () => {
       expect(result).which.eql([]);
     }).timeout(5000);
 
-    it('returns array for sending push to receive tokens', async () => {
+    it('returns array for sending push to receive tokens', () => {
       const message: FcmMessage = {
         receiver: {
           to: [
@@ -160,7 +160,7 @@ describe('FCM Service', () => {
       expect(result).to.have.Array();
     }).timeout(5000);
 
-    it('returns array for sending push to topics', async () => {
+    it('returns array for sending push to topics', () => {
       const message: FcmMessage = {
         receiver: {
           to: [
@@ -190,7 +190,7 @@ describe('FCM Service', () => {
       expect(result).which.eql([]);
     }).timeout(5000);
 
-    it('returns array for sending in value function', async () => {
+    it('returns array for sending in value function', () => {
       const message: FcmMessage = {
         receiver: {
           to: [

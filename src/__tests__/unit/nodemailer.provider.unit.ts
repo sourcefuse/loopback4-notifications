@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import {Constructor} from '@loopback/core';
 import {expect, sinon} from '@loopback/testlab';
 import proxyquire from 'proxyquire';
@@ -11,7 +12,7 @@ describe('Nodemailer Service', () => {
   };
   beforeEach(setupMockNodemailer);
   describe('nodemailer configration addition', () => {
-    it('return error when config is not passed', async () => {
+    it('return error when config is not passed', () => {
       try {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const nodemailerProvider = new NodemailerProviderMock();
