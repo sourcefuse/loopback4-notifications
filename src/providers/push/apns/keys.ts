@@ -1,8 +1,9 @@
 import {BindingKey} from '@loopback/core';
+import * as apns from 'node-apn';
+
 export namespace ApnsBinding {
   // sonarignore:start
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  export const Config = BindingKey.create<any | null>(
+  export const Config = BindingKey.create<apns.Provider | null>(
     'sf.notification.config.apns',
   );
   // sonarignore:end
