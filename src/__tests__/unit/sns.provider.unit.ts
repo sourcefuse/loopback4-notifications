@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import {Constructor} from '@loopback/core';
 import {expect, sinon} from '@loopback/testlab';
 import proxyquire from 'proxyquire';
@@ -69,6 +68,7 @@ describe('Sns Service', () => {
       .stub()
       .returns({promise: () => Promise.resolve()});
     SnsProviderMock = proxyquire('../../providers/sms/sns/sns.provider', {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'aws-sdk': {
         SNS: mockSNS,
       },
