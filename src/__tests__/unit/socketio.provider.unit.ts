@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import {Constructor} from '@loopback/core';
 import {expect, sinon} from '@loopback/testlab';
 import proxyquire from 'proxyquire';
@@ -67,6 +66,7 @@ describe('Socketio Service', () => {
     SocketMockProvider = proxyquire(
       '../../providers/push/socketio/socketio.provider',
       {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         'socket.io-client': mockSocket,
       },
     ).SocketIOProvider;
