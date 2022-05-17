@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import {Constructor} from '@loopback/context';
 import {expect, sinon} from '@loopback/testlab';
 import {ProviderOptions} from 'node-apn';

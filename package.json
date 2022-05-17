@@ -48,6 +48,7 @@
     "@loopback/context": "^4.1.2",
     "@loopback/core": "^3.1.2",
     "@loopback/rest": "^11.1.2",
+    "node-apn": "^3.0.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
@@ -85,8 +86,8 @@
     "aws-sdk": "^2.1109.0",
     "firebase-admin": "^10.0.2",
     "nodemailer": "^6.7.3",
-    "pubnub": "^5.0.1",
     "patch-package": "^6.4.7",
+    "pubnub": "^5.0.1",
     "socket.io-client": "^4.4.1"
   },
   "overrides": {
