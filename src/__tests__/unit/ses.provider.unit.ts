@@ -143,7 +143,6 @@ describe('Ses Service', () => {
       .stub()
       .returns({promise: () => Promise.resolve()});
     SesMockProvider = proxyquire('../../providers/email/ses/ses.provider', {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'aws-sdk': {
         SES: mockSES,
       },

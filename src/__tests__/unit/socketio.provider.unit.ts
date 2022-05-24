@@ -66,7 +66,6 @@ describe('Socketio Service', () => {
     SocketMockProvider = proxyquire(
       '../../providers/push/socketio/socketio.provider',
       {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'socket.io-client': mockSocket,
       },
     ).SocketIOProvider;
