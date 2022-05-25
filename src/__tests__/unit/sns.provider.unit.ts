@@ -68,7 +68,6 @@ describe('Sns Service', () => {
       .stub()
       .returns({promise: () => Promise.resolve()});
     SnsProviderMock = proxyquire('../../providers/sms/sns/sns.provider', {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'aws-sdk': {
         SNS: mockSNS,
       },

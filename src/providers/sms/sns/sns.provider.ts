@@ -36,7 +36,6 @@ export class SnsProvider implements Provider<SNSNotification> {
           };
           if (message.options?.smsType) {
             msg.MessageAttributes = {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
               'AWS.SNS.SMS.SMSType': {
                 DataType: 'String',
                 StringValue: message.options.smsType,
