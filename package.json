@@ -1,6 +1,6 @@
 {
   "name": "loopback4-notifications",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "An extension for setting up various notification mechanisms in loopback4 application, vis-a-vis, Push notification, SMS notification, Email notification",
   "keywords": [
     "loopback-extension",
@@ -37,12 +37,24 @@
   },
   "typesVersions": {
     "*": {
-      "nodemailer": ["./dist/providers/email/nodemailer/index.d.ts"],
-      "ses": ["./dist/providers/email/ses/index.d.ts"],
-      "fcm": ["./dist/providers/push/fcm/index.d.ts"],
-      "pubnub": ["./dist/providers/push/pubnub/index.d.ts"],
-      "socketio": ["./dist/providers/push/socketio/index.d.ts"],
-      "sns": ["./dist/providers/sms/sns/index.d.ts"]
+      "nodemailer": [
+        "./dist/providers/email/nodemailer/index.d.ts"
+      ],
+      "ses": [
+        "./dist/providers/email/ses/index.d.ts"
+      ],
+      "fcm": [
+        "./dist/providers/push/fcm/index.d.ts"
+      ],
+      "pubnub": [
+        "./dist/providers/push/pubnub/index.d.ts"
+      ],
+      "socketio": [
+        "./dist/providers/push/socketio/index.d.ts"
+      ],
+      "sns": [
+        "./dist/providers/sms/sns/index.d.ts"
+      ]
     }
   },
   "engines": {

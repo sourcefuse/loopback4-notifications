@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v3.1.1...v4.0.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* **provider:** fix import error for aws, pubnub and nodemailer ([#52](https://github.com/sourcefuse/loopback4-notifications/issues/52)) ([40eee0b](https://github.com/sourcefuse/loopback4-notifications/commit/40eee0b85a59e0c3f3b39db8d9e724f644d41967)), closes [#30](https://github.com/sourcefuse/loopback4-notifications/issues/30)
+
+
+### BREAKING CHANGES
+
+* **provider:** change import path for specific providers
+
 ## [3.1.1](https://github.com/sourcefuse/loopback4-notifications/compare/v3.1.0...v3.1.1) (2022-06-17)
 
 # [3.1.0](https://github.com/sourcefuse/loopback4-notifications/compare/v3.0.4...v3.1.0) (2022-05-26)
