@@ -14,8 +14,7 @@
     "**/.git": true,
     "**/.hg": true,
     "**/.svn": true,
-    "**/CVS": true,
-    "dist": true,
+    "**/CVS": true
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
