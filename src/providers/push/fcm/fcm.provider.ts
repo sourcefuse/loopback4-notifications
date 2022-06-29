@@ -1,6 +1,7 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import * as admin from 'firebase-admin';
+import {GeneralMessage} from '.';
 import {FcmBindings} from './keys';
 import {FcmMessage, FcmNotification, FcmSubscriberType} from './types';
 
@@ -44,13 +45,7 @@ export class FcmProvider implements Provider<FcmNotification> {
 
   sendingPushToReceiverTokens(
     message: FcmMessage,
-    generalMessageObj: {
-      notification: admin.messaging.Notification;
-      android?: admin.messaging.AndroidConfig;
-      webpush?: admin.messaging.WebpushConfig;
-      apns?: admin.messaging.ApnsConfig;
-      fcmOptions?: admin.messaging.FcmOptions;
-    },
+    generalMessageObj: GeneralMessage,
   ) {
     const promises: Promise<string | admin.messaging.BatchResponse>[] = [];
     /**Partial<admin.messaging.MulticastMessage>
@@ -83,16 +78,7 @@ export class FcmProvider implements Provider<FcmNotification> {
     return promises;
   }
 
-  sendingPushToTopics(
-    message: FcmMessage,
-    generalMessageObj: {
-      notification: admin.messaging.Notification;
-      android?: admin.messaging.AndroidConfig;
-      webpush?: admin.messaging.WebpushConfig;
-      apns?: admin.messaging.ApnsConfig;
-      fcmOptions?: admin.messaging.FcmOptions;
-    },
-  ) {
+  sendingPushToTopics(message: FcmMessage, generalMessageObj: GeneralMessage) {
     const promises: Promise<string | admin.messaging.BatchResponse>[] = [];
     const topics = message.receiver.to.filter(
       item => item.type === FcmSubscriberType.FCMTopic,
@@ -121,13 +107,7 @@ export class FcmProvider implements Provider<FcmNotification> {
 
   sendingPushToConditions(
     message: FcmMessage,
-    generalMessageObj: {
-      notification: admin.messaging.Notification;
-      android?: admin.messaging.AndroidConfig;
-      webpush?: admin.messaging.WebpushConfig;
-      apns?: admin.messaging.ApnsConfig;
-      fcmOptions?: admin.messaging.FcmOptions;
-    },
+    generalMessageObj: GeneralMessage,
   ) {
     const promises: Promise<string | admin.messaging.BatchResponse>[] = [];
     const conditions = message.receiver.to.filter(

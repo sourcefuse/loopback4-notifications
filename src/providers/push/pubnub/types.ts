@@ -17,6 +17,11 @@ export interface PubNubMessage extends PushMessage {
   receiver: PubNubReceiver;
 }
 
+export enum PayloadType {
+  Data,
+  Notification,
+}
+
 export interface PubNubGrantRequest extends Config {
   receiver: PubNubReceiver;
   options?: {
@@ -43,4 +48,35 @@ export interface PubnubAPNSConfig {
   apns2BundleId?: string;
 }
 
+export interface PnGcm {
+  data?: MessageConfig;
+  notification?: MessageConfig;
+}
+
+export interface PnApns {
+  aps: Aps;
+  pnPush: TargetsType[];
+}
+
+export interface Aps {
+  alert: MessageConfig;
+  key?: string;
+  sound: string;
+}
+
+export interface TargetsType {
+  version: string;
+  targets: {
+    environment?: string;
+    topic?: string;
+  }[];
+}
+export interface MessageConfig {
+  title?: string;
+  description: string;
+}
+
+export interface GeneralMessageType {
+  pnApns: PnGcm;
+}
 export type PubnubConfig = PubnubAPNSConfig & Pubnub.PubnubConfig;

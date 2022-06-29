@@ -7,6 +7,7 @@ import {Config} from '../../types';
 describe('Pubnub Service', () => {
   let PubnubProviderMock: Constructor<PubNubProvider>;
   const pubnubConfig: PubnubConfig = {
+    uuid: '1',
     subscribeKey: 'test',
   };
   beforeEach(setupMockPubnub);
@@ -21,6 +22,7 @@ describe('Pubnub Service', () => {
         sentDate: new Date(),
         type: 0,
       };
+
       const result = await pubnubProvider
         .publish(message)
         .catch(err => err.message);

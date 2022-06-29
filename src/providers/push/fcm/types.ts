@@ -86,3 +86,10 @@ export interface FcmConfig {
   dbUrl: string;
   serviceAccountPath: string;
 }
+export interface GeneralMessage {
+  notification: admin.messaging.Notification;
+  android?: admin.messaging.AndroidConfig;
+  webpush?: admin.messaging.WebpushConfig;
+  apns?: admin.messaging.ApnsConfig;
+  fcmOptions?: admin.messaging.FcmOptions;
+}
