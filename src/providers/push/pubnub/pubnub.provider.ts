@@ -2,7 +2,7 @@ import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import Pubnub from 'pubnub';
 import {Aps, MessageConfig, PnApns, TargetsType} from '.';
-import {PayloadType} from '..';
+import {PayloadType} from './types';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
 import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
