@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v4.0.0...v4.0.1) (2022-07-08)
+
+
+### Bug Fixes
+
+* **provider:** payloadtype path in pubnub provider ([#79](https://github.com/sourcefuse/loopback4-notifications/issues/79)) ([7c4f04a](https://github.com/sourcefuse/loopback4-notifications/commit/7c4f04a750a4b0de276de313e75cb414e5955ea4)), closes [#0](https://github.com/sourcefuse/loopback4-notifications/issues/0)
+
 # [4.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v3.1.1...v4.0.0) (2022-06-29)
 
 
