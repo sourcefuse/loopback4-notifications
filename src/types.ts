@@ -10,6 +10,8 @@ export interface INotificationConfig {
 export interface Message {
   subject?: string;
   body: string;
+  text?:string;
+  html?:string;
   receiver: Receiver;
   sentDate: Date;
   type: MessageType;

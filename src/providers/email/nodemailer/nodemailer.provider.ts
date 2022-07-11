@@ -46,7 +46,7 @@ export class NodemailerProvider implements Provider<NodemailerNotification> {
             'Message receiver not found in request',
           );
         }
-        if (!message.subject || !message.body) {
+        if (!message.subject || !(message.body || message.text || message.html)) {
           throw new HttpErrors.BadRequest('Message data incomplete');
         }
 
