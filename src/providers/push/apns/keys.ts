@@ -1,5 +1,5 @@
 import {BindingKey} from '@loopback/core';
-import * as apns from 'node-apn';
+import * as apns from '@parse/node-apn';
 
 export namespace ApnsBinding {
   // sonarignore:start

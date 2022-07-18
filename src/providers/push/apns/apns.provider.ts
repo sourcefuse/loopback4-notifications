@@ -1,6 +1,6 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import apns from 'node-apn';
+import apns from '@parse/node-apn';
 import {ApnsBinding} from './keys';
 import {ApnsConfigType, ApnsMessage, ApnsSubscriberType} from './types';
 // sonarignore:start
