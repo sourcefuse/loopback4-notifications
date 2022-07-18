@@ -1,4 +1,4 @@
-import {ProviderOptions} from 'node-apn';
+import {ProviderOptions} from '@parse/node-apn';
 import {
   PushMessage,
   PushNotification,
