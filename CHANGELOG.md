@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v4.0.1...v5.0.0) (2022-07-18)
+
+
+### Bug Fixes
+
+* **deps:** replace vulnerable node-apn ([#87](https://github.com/sourcefuse/loopback4-notifications/issues/87)) ([e0bddab](https://github.com/sourcefuse/loopback4-notifications/commit/e0bddab344b9bc681b5c30eeaba31e4ca94ed107)), closes [#83](https://github.com/sourcefuse/loopback4-notifications/issues/83)
+
+
+### BREAKING CHANGES
+
+* **deps:** replace vulnerable node-apn
+
 ## [4.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v4.0.0...v4.0.1) (2022-07-08)
 
 
