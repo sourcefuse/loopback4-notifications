@@ -1,6 +1,6 @@
 import {Constructor} from '@loopback/context';
 import {expect, sinon} from '@loopback/testlab';
-import {ProviderOptions} from 'node-apn';
+import {ProviderOptions} from '@parse/node-apn';
 import proxyquire from 'proxyquire';
 import {ApnsProvider} from '../../providers';
 import {ApnsMessage} from '../../providers/push/apns/types';
@@ -216,7 +216,7 @@ describe('Apns Service', () => {
     MockApns.prototype.apns.prototype.Provider = sinon.stub().returns(true);
     /* eslint-disable */
     ApnsMockProvider = proxyquire('../../providers/push/apns/apns.provider', {
-      'node-apn': {
+      '@parse/node-apn': {
         Provider: function (config: ProviderOptions) {
           return {};
         },
