@@ -1,3 +1,5 @@
+## [5.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v5.0.0...v5.0.1) (2022-09-09)
+
 # [5.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v4.0.1...v5.0.0) (2022-07-18)
 
 

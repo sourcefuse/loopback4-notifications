@@ -1,6 +1,6 @@
 {
   "name": "loopback4-notifications",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "An extension for setting up various notification mechanisms in loopback4 application, vis-a-vis, Push notification, SMS notification, Email notification",
   "keywords": [
     "loopback-extension",
@@ -133,10 +133,10 @@
     "typescript": "~4.7.4"
   },
   "overrides": {
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  }
-},
+    "publishConfig": {
+      "registry": "https://registry.npmjs.org/"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-customizable"
