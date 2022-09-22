@@ -22,6 +22,8 @@ It provides a generic provider-based framework to add your own implementation or
 5. [FCM](https://firebase.google.com/docs/cloud-messaging) - It's one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
 6. [Nodemailer](https://nodemailer.com/about/) - It's one of the EmailProvider for sending email messages.
 7. [Apple Push Notification service](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1) - It's one of the push notification providers that integrates notification service created by Apple Inc. that enables third party application developers to send notification data to applications installed on Apple devices.
+8. [Twilio SMS Service](https://www.twilio.com/docs/sms, https://www.twilio.com/docs/whatsapp) - Twilio is a modern communication API Used by developers for establishing communications. Twilio can be used for sending SMS or Whatapp notifications.
+   You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
 You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
@@ -281,7 +283,7 @@ If you wish to use any other service provider of your choice, you can create a p
 this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
 ```
 
-### SMS Notifications
+### SMS Notifications using AWS SNS
 
 This extension provides in-built support of AWS Simple Notification Service integration for sending SMS from the application. In order to use it, run `npm install aws-sdk`, and then bind the SnsProvider as below in `application.ts`.
 
@@ -341,7 +343,70 @@ If you wish to use any other service provider of your choice, you can create a p
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
 
-### Push Notifications With Pubnub
+
+### SMS / Whatsapp Notifications using Twilio
+
+This extension provides in-built support of Twilio integration for sending SMS / whatsapp notifications from the application. In order to use it, run `npm install twilio`, and then bind the TwilioProvider as below in application.ts.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {
+  TwilioProvider
+} from 'loopback4-notification/twilio';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.SMSProvider).toProvider(TwilioProvider);
+    ....
+  }
+}
+```
+
+There are some additional configurations needed in order to allow SNS to connect to Twilio. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {
+  TwilioBindings,
+  TwilioProvider
+} from 'loopback4-notification/twilio';
+....
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    ....
+
+    this.component(NotificationsComponent);
+    this.bind(TwilioBindings.Config).to({
+      accountSid: process.env.TWILIO_ACCOUNT_SID,
+      authToken: process.env.TWILIO_AUTH_TOKEN,
+      waFrom: process.env.TWILIO_WA_FROM,
+      smsFrom: process.env.TWILIO_SMS_FROM,
+      statusCallback:process.env.TWILIO_SMS_STATUS_CALLBACK,
+    });
+    this.bind(NotificationBindings.SMSProvider).toProvider(TwilioProvider);
+    ....
+  }
+}
+```
+
+All the configurations as specified by Twilio docs and console are supported in above TwilioBindings Config key. smsFrom could be messaging service id, twilio number or short code. waFrom could be whats app number or number associated to channel.
+
+### Push Notifications with Pubnub
 
 This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, run `npm install pubnub`, and then bind the PushProvider as below in `application.ts`.
 
