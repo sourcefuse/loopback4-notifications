@@ -27,6 +27,21 @@ describe('Twilio Service', () => {
     type: 2,
     subject: undefined,
   };
+  const messageTextMedia: TwilioMessage = {
+    receiver: {
+      to: [
+        {
+          id: 'XXXXXXXXXXX',
+          type: 1,
+        },
+      ],
+    },
+    body: 'Test SMS Notification with media',
+    mediaUrl: ['https://demo.twilio.com/owl.png'],
+    sentDate: new Date(),
+    type: 2,
+    subject: undefined,
+  };
   const messageWhatsApp: TwilioMessage = {
     receiver: {
       to: [
@@ -61,7 +76,6 @@ describe('Twilio Service', () => {
     authToken: 'AUTHDUMMY',
     waFrom: '', //Ex. whatsapp:+XXXXXXXXXXX
     smsFrom: '',
-    statusCallback: '',
     opts: {dummy: true}, //Change dummy value to false when using unit test
   };
 
@@ -96,9 +110,19 @@ describe('Twilio Service', () => {
       }
     });
 
+    it('returns the message (SMS with media)', async () => {
+      const twilioProvider = new TwilioProviderMock(configration).value();
+      const result = twilioProvider.publish(messageTextMedia);
+      if (configration.opts?.dummy) {
+        expect(result).to.have.Promise();
+      } else {
+        await expect(result).to.be.fulfilled();
+      }
+    });
+
     it('returns the message (Whatsapp)', async () => {
       const twilioProvider = new TwilioProviderMock(configration).value();
-      const result = twilioProvider.publish(messageWAMedia);
+      const result = twilioProvider.publish(messageWhatsApp);
       if (configration.opts?.dummy) {
         expect(result).to.have.Promise();
       } else {
@@ -108,7 +132,7 @@ describe('Twilio Service', () => {
 
     it('returns the message (Whatsapp with Media)', async () => {
       const twilioProvider = new TwilioProviderMock(configration).value();
-      const result = twilioProvider.publish(messageWhatsApp);
+      const result = twilioProvider.publish(messageWAMedia);
       if (configration.opts?.dummy) {
         expect(result).to.have.Promise();
       } else {

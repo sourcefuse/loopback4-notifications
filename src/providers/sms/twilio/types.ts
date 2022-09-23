@@ -38,7 +38,8 @@ export interface TwilioAuthConfig extends Twilio.TwilioClientOptions {
   authToken?: string;
   waFrom?: String; //Whatsapp channel or phone number
   smsFrom?: string; //From address of SMS twilio number or messaging SID
-  statusCallback?: string; //Status callback url to get messagte status
+  waStatusCallback?: string; //Status callback url to get WA message status
+  smsStatusCallback?: string; //Status callback url to get SMS status
   opts?: SMSMessageOptions;
 }
 

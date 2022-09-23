@@ -371,7 +371,7 @@ export class NotificationServiceApplication extends BootMixin(
 }
 ```
 
-There are some additional configurations needed in order to allow SNS to connect to Twilio. You need to add them as below. Make sure these are added before the provider binding.
+There are some additional configurations needed in order to connect to Twilio. You need to add them as below. Make sure these are added before the provider binding.
 
 ```ts
 import {
@@ -396,7 +396,8 @@ export class NotificationServiceApplication extends BootMixin(
       authToken: process.env.TWILIO_AUTH_TOKEN,
       waFrom: process.env.TWILIO_WA_FROM,
       smsFrom: process.env.TWILIO_SMS_FROM,
-      statusCallback:process.env.TWILIO_SMS_STATUS_CALLBACK,
+      waStatusCallback:process.env.TWILIO_WA_STATUS_CALLBACK,
+      smsStatusCallback:process.env.TWILIO_SMS_STATUS_CALLBACK,
     });
     this.bind(NotificationBindings.SMSProvider).toProvider(TwilioProvider);
     ....

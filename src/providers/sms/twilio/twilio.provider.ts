@@ -54,15 +54,19 @@ export class TwilioProvider implements Provider<TwilioNotification> {
           };
 
           // eslint-disable-next-line no-unused-expressions
-          !receiver.type &&
-            message.mediaUrl &&
-            (twilioMsgObj.mediaUrl = message.mediaUrl);
+          message.mediaUrl && (twilioMsgObj.mediaUrl = message.mediaUrl);
 
           // eslint-disable-next-line no-unused-expressions
           receiver.type &&
             receiver.type === TwilioSubscriberType.TextSMSUser &&
-            this.twilioConfig?.statusCallback &&
-            (twilioMsgObj.statusCallback = this.twilioConfig?.statusCallback);
+            this.twilioConfig?.smsStatusCallback &&
+            (twilioMsgObj.statusCallback =
+              this.twilioConfig?.smsStatusCallback);
+
+          // eslint-disable-next-line no-unused-expressions
+          !receiver.type &&
+            this.twilioConfig?.waStatusCallback &&
+            (twilioMsgObj.statusCallback = this.twilioConfig?.waStatusCallback);
 
           return this.twilioService.messages.create(twilioMsgObj);
         });
