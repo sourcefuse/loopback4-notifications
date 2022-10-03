@@ -338,7 +338,7 @@ If you wish to use any other service provider of your choice, you can create a p
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
 
-### Push Notifications with Pubnub
+### Push Notifications With Pubnub
 
 This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, run `npm install pubnub`, and then bind the PushProvider as below in `application.ts`.
 
@@ -466,6 +466,70 @@ If you wish to use any other service provider of your choice, you can create a p
 
 ```ts
 this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
+```
+
+### Push Notifications With FCM
+
+This extension provides in-built support of Firebase Cloud Messaging integration for sending realtime push notifications from the application. In order to use it, run `npm i firebase-admin`, and then bind the PushProvider as below in `application.ts`.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {FcmProvider} from 'loopback4-notifications/fcm';
+
+export class MyApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.PushProvider).toProvider(FcmProvider);
+    // ...
+  }
+}
+```
+
+There are some additional configurations needed in order to use Firebase Cloud Messaging. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {FcmProvider} from 'loopback4-notifications/fcm';
+
+export class NotificationServiceApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+
+    this.component(NotificationsComponent);
+    this.bind(FcmProvider.Config).to({
+      apiKey: 'API_KEY',
+      authDomain: 'PROJECT_ID.firebaseapp.com',
+      // The value of `databaseURL` depends on the location of the database
+      databaseURL: 'https://DATABASE_NAME.firebaseio.com',
+      projectId: 'PROJECT_ID',
+      storageBucket: 'PROJECT_ID.appspot.com',
+      messagingSenderId: 'SENDER_ID',
+      appId: 'APP_ID',
+      // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+      measurementId: 'G-MEASUREMENT_ID',
+    });
+    this.bind(NotificationBindings.PushProvider).toProvider(FcmProvider);
+    // ...
+  }
+}
+```
+
+If you wish to use any other service provider of your choice, you can create a provider for the same, similar to FcmProvider we have. Add that provider in place of FcmProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/fcm/).
+
+```ts
+this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
 
 ### Controller Usage
