@@ -32,6 +32,7 @@ export class SocketIOProvider implements Provider<SocketNotification> {
            * emitting a message to channel passed via config
            */
 
+          // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
           if (!this.socketConfig || !this.socketConfig.defaultPath) {
             throw new HttpErrors.PreconditionFailed(
               'Channel info is missing !',
