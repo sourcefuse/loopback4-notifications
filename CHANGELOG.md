@@ -1,3 +1,23 @@
+## Release [v5.1.0](https://github.com/sourcefuse/loopback4-notifications/compare/v5.0.3..v5.1.0) January 11, 2023
+Welcome to the January 11, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/-105) :- [feat(chore): generate detailed and informative changelog ](https://github.com/sourcefuse/loopback4-notifications/commit/c6bfb98e3b41d34146d3f3b6c1e979582e468c6a) was commited on January 11, 2023 by [yeshamavani](mailto:83634146+yeshamavani@users.noreply.github.com)
+    
+      - Using Customizable npm package to generate changelog
+      
+      -  GH-105
+      
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/-103) :- [chore(deps): loopback version update ](https://github.com/sourcefuse/loopback4-notifications/commit/8d0736e4a07f06729e65cc982226c9c5a11b4530) was commited on January 11, 2023 by [Surbhi Sharma](mailto:98279679+Surbhi-sharma1@users.noreply.github.com)
+    
+      - Updated version of the lb4 dependencies to the latest.
+      
+      -  GH-103
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## [5.0.3](https://github.com/sourcefuse/loopback4-notifications/compare/v5.0.2...v5.0.3) (2022-12-02)
 
 ## [5.0.2](https://github.com/sourcefuse/loopback4-notifications/compare/v5.0.1...v5.0.2) (2022-10-31)
