@@ -1,3 +1,18 @@
+## Release [v5.1.1](https://github.com/sourcefuse/loopback4-notifications/compare/v5.1.0..v5.1.1) January 15, 2023
+Welcome to the January 15, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [](https://github.com/sourcefuse/loopback4-notifications/commit/c349d904ce8347ed9eb242ef9eda95ef0098a7d3) was commited on January 15, 2023 by [Samarpan  Bhattacharya](mailto:samarpan.bhattacharya@Samarpans-MacBook-Air.local)
+    
+      - @parse/node-apn was a dependency but its an optional feature. So its moved as a
+      
+      - dev dependency and exported as optional providers.
+      
+      - gh-0
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v5.1.0](https://github.com/sourcefuse/loopback4-notifications/compare/v5.0.3..v5.1.0) January 11, 2023
 Welcome to the January 11, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
