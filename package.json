@@ -1,6 +1,6 @@
 {
   "name": "loopback4-notifications",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "An extension for setting up various notification mechanisms in loopback4 application, vis-a-vis, Push notification, SMS notification, Email notification",
   "keywords": [
     "loopback-extension",
