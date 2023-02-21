@@ -11,20 +11,21 @@
 [![Downloads](https://img.shields.io/npm/dw/loopback4-notifications.svg?label=Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
 [![Total Downloads](https://img.shields.io/npm/dt/loopback4-notifications.svg?label=Total%20Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
 
-This is a loopback-next extension for adding different notification mechanisms vis-à-vis, Push, SMS, Email, to any loopback 4 based REST API application or microservice.
+This is a loopback-next extension for adding different notification mechanisms vis-à-vis, Push, SMS, Email to any loopback 4 based REST API application or microservice.
 
-It provides a generic provider-based framework to add your own implementation or implement any external service provider to achieve the same. There are 3 different providers available to be injected namely, PushProvider, SMSProvider and EmailProvider. It also provides support for 3 very popular external services for sending notifications.
+It provides a generic provider-based framework to add your own implementation or implement any external service provider to achieve the same. There are 3 different providers available to be injected namely, PushProvider, SMSProvider and EmailProvider. It also provides support for 7 very popular external services for sending notifications.
 
-1. [AWS Simple Email Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html) - Its one of the EmailProvider for sending email messages.
-2. [AWS Simple Notification Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html) - Its one of the SMSProvider for sending SMS notifications.
-3. [Pubnub](https://www.pubnub.com/docs/nodejs-javascript/pubnub-javascript-sdk) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
-4. [Socket.IO](https://socket.io/docs/) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
-5. [FCM](https://firebase.google.com/docs/cloud-messaging) - Its one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
-6. [Nodemailer](https://nodemailer.com/about/) - Its one of the EmailProvider for sending email messages.
+1. [AWS Simple Email Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html) - It's one of the EmailProvider for sending email messages.
+2. [AWS Simple Notification Service](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html) - It's one of the SMSProvider for sending SMS notifications.
+3. [Pubnub](https://www.pubnub.com/docs/nodejs-javascript/pubnub-javascript-sdk) - It's one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+4. [Socket.IO](https://socket.io/docs/) - It's one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+5. [FCM](https://firebase.google.com/docs/cloud-messaging) - It's one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
+6. [Nodemailer](https://nodemailer.com/about/) - It's one of the EmailProvider for sending email messages.
+7. [Apple Push Notification service](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1) - It's one of the push notification providers that integrates notification service created by Apple Inc. that enables third party application developers to send notification data to applications installed on Apple devices.
 
 You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
-## Install
+## Installation
 
 ```sh
 npm install loopback4-notifications
@@ -39,46 +40,41 @@ Add component to application.
 ```ts
 // application.ts
 import {NotificationsComponent} from 'loopback4-notifications';
-....
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
-    ....
+    // ...
   }
 }
 ```
 
 After the above, you need to configure one of the notification provider at least. Based upon the requirement, please choose and configure the respective provider for sending notifications. See below.
 
-### Email Notifications
+### Email Notifications using Amazon Simple Email Service
 
-This extension provides in-built support of AWS Simple Email Service integration for sending emails from the application. In order to use it, run `npm install aws-sdk`, and then bind the SesProvider as below in application.ts.
+This extension provides in-built support of AWS Simple Email Service integration for sending emails from the application. In order to use it, run `npm install aws-sdk`, and then bind the SesProvider as below in `application.ts`.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SesProvider
-} from 'loopback-notifications/ses';
-....
-
+import {SesProvider} from 'loopback-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.EmailProvider).toProvider(SesProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -90,17 +86,13 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SesProvider,
-  SESBindings,
-} from 'loopback-notifications/ses';
-....
+import {SesProvider, SESBindings} from 'loopback-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(SESBindings.Config).to({
@@ -109,12 +101,12 @@ export class NotificationServiceApplication extends BootMixin(
       region: process.env.SES_REGION,
     });
     this.bind(NotificationBindings.EmailProvider).toProvider(SesProvider);
-    ....
+    // ...
   }
 }
 ```
 
-All the configurations as specified by AWS docs [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#constructor-property) are supported in above SESBindings.Config key.
+All the configurations as specified by AWS docs [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#constructor-property) are supported in above `SESBindings.Config` key.
 
 In addition to this, some general configurations can also be done, like below.
 
@@ -123,22 +115,18 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SesProvider,
-  SESBindings,
-} from 'loopback-notifications/ses';
-....
+import {SesProvider, SESBindings} from 'loopback-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.Config).to({
       sendToMultipleReceivers: false,
-      senderEmail: 'support@myapp.com'
+      senderEmail: 'support@myapp.com',
     });
     this.bind(SESBindings.Config).to({
       accessKeyId: process.env.SES_ACCESS_KEY_ID,
@@ -146,7 +134,7 @@ export class NotificationServiceApplication extends BootMixin(
       region: process.env.SES_REGION,
     });
     this.bind(NotificationBindings.EmailProvider).toProvider(SesProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -166,27 +154,26 @@ this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
 
 ### Email Notifications Using Nodemailer
 
-This extension provides in-built support of Nodemailer integration for sending emails from the application. In order to use it, run `npm install nodemailer`, and then bind the NodemailerProvider as below in application.ts.
+This extension provides in-built support of Nodemailer integration for sending emails from the application. In order to use it, run `npm install nodemailer`, and then bind the NodemailerProvider as below in `application.ts`.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  NodemailerProvider
-} from 'loopback4-notifications/nodemailer';
-....
+import {NodemailerProvider} from 'loopback4-notifications/nodemailer';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
-    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
-    ....
+    this.bind(NotificationBindings.EmailProvider).toProvider(
+      NodemailerProvider,
+    );
+    // ...
   }
 }
 ```
@@ -202,32 +189,33 @@ import {
   NodemailerProvider,
   NodemailerBindings,
 } from 'loopback4-notifications/nodemailer';
-....
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NodemailerBindings.Config).to({
       pool: true,
       maxConnections: 100,
-      url:"",
-      host: "smtp.example.com",
+      url: '',
+      host: 'smtp.example.com',
       port: 80,
       secure: false,
       auth: {
-       user: "username",
-       pass: "password"
+        user: 'username',
+        pass: 'password',
       },
       tls: {
-        rejectUnauthorized: true
-       }
+        rejectUnauthorized: true,
+      },
     });
-    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
-    ....
+    this.bind(NotificationBindings.EmailProvider).toProvider(
+      NodemailerProvider,
+    );
+    // ...
   }
 }
 ```
@@ -245,36 +233,37 @@ import {
   NodemailerProvider,
   NodemailerBindings,
 } from 'loopback4-notifications/nodemailer';
-....
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.Config).to({
       sendToMultipleReceivers: false,
-      senderEmail: 'support@myapp.com'
+      senderEmail: 'support@myapp.com',
     });
     this.bind(NodemailerBindings.Config).to({
       pool: true,
       maxConnections: 100,
-      url:"",
-      host: "smtp.example.com",
+      url: '',
+      host: 'smtp.example.com',
       port: 80,
       secure: false,
       auth: {
-       user: "username",
-       pass: "password"
+        user: 'username',
+        pass: 'password',
       },
       tls: {
-        rejectUnauthorized: true
-       }
+        rejectUnauthorized: true,
+      },
     });
-    this.bind(NotificationBindings.EmailProvider).toProvider(NodemailerProvider);
-    ....
+    this.bind(NotificationBindings.EmailProvider).toProvider(
+      NodemailerProvider,
+    );
+    // ...
   }
 }
 ```
@@ -294,27 +283,25 @@ this.bind(NotificationBindings.EmailProvider).toProvider(MyOwnProvider);
 
 ### SMS Notifications
 
-This extension provides in-built support of AWS Simple Notification Service integration for sending SMS from the application. In order to use it, run `npm install aws-sdk`, and then bind the SnsProvider as below in application.ts.
+This extension provides in-built support of AWS Simple Notification Service integration for sending SMS from the application. In order to use it, run `npm install aws-sdk`, and then bind the SnsProvider as below in `application.ts`.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SnsProvider
-} from 'loopback4-notification/sns';
-....
+import {SnsProvider} from 'loopback4-notification/sns';
+// ...
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.SMSProvider).toProvider(SnsProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -326,17 +313,13 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SNSBindings,
-  SnsProvider
-} from 'loopback4-notification/sns';
-....
+import {SNSBindings, SnsProvider} from 'loopback4-notification/sns';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(SNSBindings.Config).to({
@@ -345,7 +328,7 @@ export class NotificationServiceApplication extends BootMixin(
       region: process.env.SNS_REGION,
     });
     this.bind(NotificationBindings.SMSProvider).toProvider(SnsProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -358,29 +341,26 @@ If you wish to use any other service provider of your choice, you can create a p
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
 
-### Push Notifications with Pubnub
+### Push Notifications With Pubnub
 
-This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, run `npm install pubnub`, and then bind the PushProvider as below in application.ts.
+This extension provides in-built support of Pubnub integration for sending realtime push notifications from the application. In order to use it, run `npm install pubnub`, and then bind the PushProvider as below in `application.ts`.
 
 ```ts
 import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  PubNubProvider
-} from 'loopback4-notifications/pubnub';
-....
+import {PubNubProvider} from 'loopback4-notifications/pubnub';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.PushProvider).toProvider(PubNubProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -392,17 +372,13 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  PubnubBindings,
-  PubNubProvider
-} from 'loopback4-notifications/pubnub';
-....
+import {PubnubBindings, PubNubProvider} from 'loopback4-notifications/pubnub';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(PubNubProvider.Config).to({
@@ -414,10 +390,10 @@ export class NotificationServiceApplication extends BootMixin(
       uuid: 'my-app',
       cipherKey: process.env.PUBNUB_CIPHER_KEY,
       apns2Env: 'production',
-      apns2BundleId: 'com.app.myapp'
+      apns2BundleId: 'com.app.myapp',
     });
     this.bind(NotificationBindings.PushProvider).toProvider(PubNubProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -431,12 +407,12 @@ For PAM support, PubNubProvider exposes two more methods - grantAccess and revok
 If you wish to use any other service provider of your choice, you can create a provider for the same, similar to PubNubProvider we have. Add that provider in place of PubNubProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/pubnub/).
 
 ```ts
-this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
+this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
 ```
 
 ### Push Notifications With Socket.io
 
-This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, run `npm install socket.io-client`, and  bind the PushProvider as below in application.ts.
+This extension provides in-built support of Socket.io integration for sending realtime notifications from the application. In order to use it, run `npm install socket.io-client`, and bind the PushProvider as below in `application.ts`.
 
 This provider sends the message to the channel passed via config (or while publishing) and accepts a fix interface to interact with.
 The interface could be imported into the project by the name SocketMessage.
@@ -446,20 +422,17 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {
-  SocketIOProvider
-} from 'loopback4-notifications/socketio';
-....
+import {SocketIOProvider} from 'loopback4-notifications/socketio';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(NotificationBindings.PushProvider).toProvider(SocketIOProvider);
-    ....
+    // ...
   }
 }
 ```
@@ -473,27 +446,145 @@ import {
 } from 'loopback4-notifications';
 import {
   SocketBindings,
-  SocketIOProvider
+  SocketIOProvider,
 } from 'loopback4-notifications/socketio';
-....
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
-    ....
+    // ...
 
     this.component(NotificationsComponent);
     this.bind(SocketBindings.Config).to({
-      url: process.env.SOCKETIO_SERVER_URL
+      url: process.env.SOCKETIO_SERVER_URL,
     });
     this.bind(NotificationBindings.PushProvider).toProvider(SocketIOProvider);
-    ....
+    // ...
   }
 }
 ```
 
 If you wish to use any other service provider of your choice, you can create a provider for the same, similar to SocketIOProvider we have. Add that provider in place of SocketIOProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/socketio/).
+
+```ts
+this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
+```
+
+### Push Notifications With FCM
+
+This extension provides in-built support of Firebase Cloud Messaging integration for sending realtime push notifications from the application. In order to use it, run `npm i firebase-admin`, and then bind the PushProvider as below in `application.ts`.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {FcmProvider} from 'loopback4-notifications/fcm';
+export class MyApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.PushProvider).toProvider(FcmProvider);
+    // ...
+  }
+}
+```
+
+There are some additional configurations needed in order to use Firebase Cloud Messaging. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {FcmProvider, FcmBindings} from 'loopback4-notifications/fcm';
+export class MyApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+    this.component(NotificationsComponent);
+    this.bind(FcmBindings.Config).to({
+      apiKey: 'API_KEY',
+      authDomain: 'PROJECT_ID.firebaseapp.com',
+      // The value of `databaseURL` depends on the location of the database
+      databaseURL: 'https://DATABASE_NAME.firebaseio.com',
+      projectId: 'PROJECT_ID',
+      storageBucket: 'PROJECT_ID.appspot.com',
+      messagingSenderId: 'SENDER_ID',
+      appId: 'APP_ID',
+      // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+      measurementId: 'G-MEASUREMENT_ID',
+    });
+    this.bind(NotificationBindings.PushProvider).toProvider(FcmProvider);
+    // ...
+  }
+}
+```
+
+If you wish to use any other service provider of your choice, you can create a provider for the same, similar to FcmProvider we have. Add that provider in place of FcmProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/fcm/).
+
+```ts
+this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
+```
+
+### Push Notifications With APNs
+
+This extension provides in-built support of Apple Push Notification service for sending notification to applications installed on Apple devices. In order to use it bind the PushProvider as below in `application.ts`.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {ApnsProvider} from 'loopback4-notifications/apns';
+export class MyApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+    this.component(NotificationsComponent);
+    this.bind(NotificationBindings.PushProvider).toProvider(ApnsProvider);
+    // ...
+  }
+}
+```
+
+There are some additional configurations needed in order to use Apple Push Notification service. You need to add them as below. Make sure these are added before the provider binding.
+
+```ts
+import {
+  NotificationsComponent,
+  NotificationBindings,
+} from 'loopback4-notifications';
+import {ApnsProvider, ApnsBinding} from 'loopback4-notifications/apns';
+export class MyApplication extends BootMixin(
+  ServiceMixin(RepositoryMixin(RestApplication)),
+) {
+  constructor(options: ApplicationConfig = {}) {
+    // ...
+    this.component(NotificationsComponent);
+    this.bind(ApnsBinding.Config).to({
+      providerOptions: {
+        /* APNs Connection options, see below. */
+      };
+      options: {
+        badge: 1, // optional
+        topic: "string"
+      };
+    });
+    this.bind(NotificationBindings.PushProvider).toProvider(ApnsProvider);
+    // ...
+  }
+}
+```
+
+For more information about `providerOptions` check: [provider documentation](https://github.com/parse-community/node-apn/blob/master/doc/provider.markdown#apnprovideroptions)
+
+If you wish to use any other service provider of your choice, you can create a provider for the same, similar to ApnsProvider we have. Add that provider in place of ApnsProvider. Refer to the implementation [here](https://github.com/sourcefuse/loopback4-notifications/blob/master/src/providers/push/apns/).
 
 ```ts
 this.bind(NotificationBindings.PushProvider).toProvider(MyOwnProvider);
@@ -570,13 +661,12 @@ After this, you can publish notification from controller API methods as below. Y
 ```ts
 export class NotificationController {
   constructor(
-    ....
+    // ...
     @inject(NotificationBindings.NotificationProvider)
     private readonly notifProvider: INotification,
-    ....
   ) {}
 
-    @post('/notifications', {
+  @post('/notifications', {
     responses: {
       [STATUS_CODE.OK]: {
         description: 'Notification model instance',
