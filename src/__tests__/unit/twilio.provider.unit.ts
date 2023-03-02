@@ -93,7 +93,9 @@ describe('Twilio Service', () => {
     it('returns error message when no twilio config', async () => {
       try {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        //   sonarignore:start
         const twilioProvider = new TwilioProvider();
+        //   sonarignore:end
       } catch (err) {
         const result = err.message;
         expect(result).which.eql('Twilio Config missing !');

@@ -4,7 +4,7 @@ import {
   SMSMessageOptions,
   SMSNotification,
   SMSReceiver,
-  SMSSubscriber,
+  SMSSubscriber
 } from '../types';
 
 export interface TwilioNotification extends SMSNotification {
@@ -36,7 +36,7 @@ export const enum TwilioSMSType {
 
 export interface TwilioAuthConfig extends Twilio.TwilioClientOptions {
   authToken?: string;
-  waFrom?: String; //Whatsapp channel or phone number
+  waFrom?: string; //Whatsapp channel or phone number
   smsFrom?: string; //From address of SMS twilio number or messaging SID
   waStatusCallback?: string; //Status callback url to get WA message status
   smsStatusCallback?: string; //Status callback url to get SMS status
