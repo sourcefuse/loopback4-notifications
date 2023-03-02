@@ -46,8 +46,7 @@ export class MockTwilio {
   constructor(config: TwilioAuthConfig) {
     this.twilioService = twilio(config.accountSid, config.authToken);
   }
-  //   sonarignore:start
+  // sonarignore:start
   // this is intensional
   async publish(message: TwilioMessage) {}
-  //   sonarignore:end
-}
+  // sonarignore:end
