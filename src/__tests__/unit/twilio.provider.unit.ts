@@ -92,8 +92,9 @@ describe('Twilio Service', () => {
 
     it('returns error message when no twilio config', async () => {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         // sonarignore:start
+        // this is intensional
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const twilioProvider = new TwilioProvider();
         // sonarignore:end
       } catch (err) {
