@@ -1,5 +1,7 @@
 import AWS from 'aws-sdk';
 import Pubnub from 'pubnub';
+import twilio, {Twilio} from 'twilio';
+import {TwilioAuthConfig, TwilioMessage} from '../providers';
 import Mail = require('nodemailer/lib/mailer');
 import SMTPTransport = require('nodemailer/lib/smtp-transport');
 
@@ -38,3 +40,13 @@ export class MockPubnub {
   grant(grantConfig: Pubnub.GrantParameters) {}
   async publish(publishConfig: Pubnub.PublishParameters) {}
 }
+
+export class MockTwilio {
+  twilioService: Twilio;
+  constructor(config: TwilioAuthConfig) {
+    this.twilioService = twilio(config.accountSid, config.authToken);
+  }
+  // sonarignore:start
+  // this is intensional
+  async publish(message: TwilioMessage) {}
+  // sonarignore:end
