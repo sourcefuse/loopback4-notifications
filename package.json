@@ -155,6 +155,9 @@
     "@parse/node-apn": {
       "jsonwebtoken": "9.0.0"
     },
+    "twilio": {
+      "jsonwebtoken": "9.0.0"
+    },
     "body-parser": {
       "debug": "^4.3.4"
     },

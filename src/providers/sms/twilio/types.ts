@@ -4,7 +4,7 @@ import {
   SMSMessageOptions,
   SMSNotification,
   SMSReceiver,
-  SMSSubscriber
+  SMSSubscriber,
 } from '../types';
 
 export interface TwilioNotification extends SMSNotification {
