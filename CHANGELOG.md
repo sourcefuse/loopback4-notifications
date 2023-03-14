@@ -1,3 +1,70 @@
+## Release [v5.2.0](https://github.com/sourcefuse/loopback4-notifications/compare/v5.1.2..v5.2.0) March 14, 2023
+Welcome to the March 14, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [loopback4-notifications: fixing mock-sdk in unit test](https://github.com/sourcefuse/loopback4-notifications/issues/120) :- [chore(deps): lint fixes \&amp; fixing mock-sdk in unit test ](https://github.com/sourcefuse/loopback4-notifications/commit/eb4676b1f34c4eaaded7e23c3dc9d13ed80baefe) was commited on March 14, 2023 by [Gautam Agarwal](mailto:108651274+gautam23-sf@users.noreply.github.com)
+    
+      - lint fixes \&amp; fixing mock-sdk in unit test
+      
+      -  GH-120
+      
+  
+  - [ loopback version update ](https://github.com/sourcefuse/loopback4-notifications/issues/118) :- [chore(deps): loopback version update ](https://github.com/sourcefuse/loopback4-notifications/commit/4243224dc8d17df85c3025c68c174b83edcadd2f) was commited on March 13, 2023 by [Gautam Agarwal](mailto:108651274+gautam23-sf@users.noreply.github.com)
+    
+      - loopback version update
+      
+      -  GH-118
+      
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [feat(provider): send notifications/messages to whatsapp or as text SMS using Twilio ](https://github.com/sourcefuse/loopback4-notifications/commit/f9d979992ae9ab2951a0a77bb94e281c2378b1af) was commited on March 10, 2023 by [sadarunnisa-sf](mailto:109595269+sadarunnisa-sf@users.noreply.github.com)
+    
+      - * feat(provider): send notifications/messages to whatsapp or as text SMS using
+      
+      - TWILIO(#88)
+      
+      -  GH-88
+      
+      - * feat(provider): send notifications/messages to whatsapp or as text SMS using
+      
+      - TWILIO #88
+      
+      -  GH-88
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+      - * send notifications/messages to whatsapp or as text SMS using Twilio
+      
+  
+  - [Stale Bot missing in the repository ](https://github.com/sourcefuse/loopback4-notifications/issues/116) :- [chore(chore): add github stale bot ](https://github.com/sourcefuse/loopback4-notifications/commit/6f035a6999d222f2e65ce8f66f51c0e603f66f7e) was commited on February 27, 2023 by [yeshamavani](mailto:83634146+yeshamavani@users.noreply.github.com)
+    
+      - Added stale.yml file to configure stale options
+      
+      -  GH-116
+      
+  
+  - [FCM and APNS usage missing in readme](https://github.com/sourcefuse/loopback4-notifications/issues/114) :- [docs(provider): add fcm and apns usage instructions ](https://github.com/sourcefuse/loopback4-notifications/commit/a1e07348f214eeb3fbe200e94310d7e45e2aa7d2) was commited on February 21, 2023 by [Shubham P](mailto:shubham.prajapat@sourcefuse.com)
+    
+      - refactored readme.md with grammer and formatting change
+      
+      - added the usage details for firebase
+      
+      - cloud messaging (fcm) and apple push
+      
+      - notifications (apns)
+      
+      -  GH-114
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v5.1.2](https://github.com/sourcefuse/loopback4-notifications/compare/v5.1.1..v5.1.2) February 20, 2023
 Welcome to the February 20, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
