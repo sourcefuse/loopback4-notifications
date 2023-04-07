@@ -1,3 +1,16 @@
+## Release [v5.2.1](https://github.com/sourcefuse/loopback4-notifications/compare/v5.2.0..v5.2.1) April 7, 2023
+Welcome to the April 7, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [Incorrect package used in documentation](https://github.com/sourcefuse/loopback4-notifications/issues/81) :- [fix(docs): typo and link formatting fix ](https://github.com/sourcefuse/loopback4-notifications/commit/aa831f831613e993918b7d0e7c934f1c94c5d525) was commited on April 7, 2023 by [Shubham P](mailto:shubham.prajapat@sourcefuse.com)
+    
+      - of package name used in examples
+      
+      -  GH-81
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v5.2.0](https://github.com/sourcefuse/loopback4-notifications/compare/v5.1.2..v5.2.0) March 14, 2023
 Welcome to the March 14, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
