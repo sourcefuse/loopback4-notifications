@@ -22,7 +22,7 @@ It provides a generic provider-based framework to add your own implementation or
 5. [FCM](https://firebase.google.com/docs/cloud-messaging) - It's one of the PushProvider for sending realtime push notifications to mobile applications as well as web applications.
 6. [Nodemailer](https://nodemailer.com/about/) - It's one of the EmailProvider for sending email messages.
 7. [Apple Push Notification service](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1) - It's one of the push notification providers that integrates notification service created by Apple Inc. that enables third party application developers to send notification data to applications installed on Apple devices.
-8. [Twilio SMS Service](https://www.twilio.com/docs/sms, https://www.twilio.com/docs/whatsapp) - Twilio is a modern communication API Used by developers for establishing communications. Twilio can be used for sending SMS or Whatapp notifications.
+8. [Twilio SMS Service](https://www.twilio.com/docs/sms) - Twilio is a modern communication API Used by developers for establishing communications. Twilio can be used for sending SMS or [Whatapp notifications](https://www.twilio.com/docs/whatsapp).
    You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
 
 You can use one of these services or add your own implementation or integration using the same interfaces and attach it as a provider for that specific type.
@@ -66,7 +66,7 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {SesProvider} from 'loopback-notifications/ses';
+import {SesProvider} from 'loopback4-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -88,7 +88,7 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {SesProvider, SESBindings} from 'loopback-notifications/ses';
+import {SesProvider, SESBindings} from 'loopback4-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -117,7 +117,7 @@ import {
   NotificationsComponent,
   NotificationBindings,
 } from 'loopback4-notifications';
-import {SesProvider, SESBindings} from 'loopback-notifications/ses';
+import {SesProvider, SESBindings} from 'loopback4-notifications/ses';
 
 export class NotificationServiceApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -342,7 +342,6 @@ If you wish to use any other service provider of your choice, you can create a p
 ```ts
 this.bind(NotificationBindings.SMSProvider).toProvider(MyOwnProvider);
 ```
-
 
 ### SMS / Whatsapp Notifications using Twilio
 
