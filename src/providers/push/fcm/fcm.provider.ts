@@ -22,7 +22,7 @@ export class FcmProvider implements Provider<FcmNotification> {
   fcmService: admin.app.App;
 
   initialValidations(message: FcmMessage) {
-    const messageReceiverLength = 500;
+    const maxReceivers = 500;
     if (
       message.receiver.to.length === 0 &&
       !message.options.topic &&
@@ -32,7 +32,7 @@ export class FcmProvider implements Provider<FcmNotification> {
         'Message receiver, topic or condition not found in request !',
       );
     }
-    if (message.receiver.to.length > messageReceiverLength) {
+    if (message.receiver.to.length > maxReceivers) {
       throw new HttpErrors.BadRequest(
         'Message receiver count cannot exceed 500 !',
       );
@@ -70,10 +70,10 @@ export class FcmProvider implements Provider<FcmNotification> {
         data: {...message.options.data},
       };
 
-      message.options.dryRun = false;
+      const dryRun = message.options.dryRun ?? false;
       const sendPromise = this.fcmService
         .messaging()
-        .sendMulticast(msgToTransfer);
+        .sendMulticast(msgToTransfer, dryRun);
       promises.push(sendPromise);
     }
     return promises;
@@ -95,9 +95,10 @@ export class FcmProvider implements Provider<FcmNotification> {
           data: {...message.options.data},
         };
 
-        // eslint-disable-next-line no-unused-expressions
-        message.options.dryRun ?? false;
-        const sendPromise = this.fcmService.messaging().send(msgToTransfer);
+        const dryRun = message.options.dryRun ?? false;
+        const sendPromise = this.fcmService
+          .messaging()
+          .send(msgToTransfer, dryRun);
         promises.push(sendPromise);
       });
     }
@@ -123,9 +124,10 @@ export class FcmProvider implements Provider<FcmNotification> {
           ...generalMessageObj,
           data: {...message.options.data},
         };
-        // eslint-disable-next-line no-unused-expressions
-        message.options.dryRun ?? false;
-        const sendPromise = this.fcmService.messaging().send(msgToTransfer);
+        const dryRun = message.options.dryRun ?? false;
+        const sendPromise = this.fcmService
+          .messaging()
+          .send(msgToTransfer, dryRun);
         promises.push(sendPromise);
       });
     }

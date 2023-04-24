@@ -1,3 +1,4 @@
+import {AnyObject} from '@loopback/repository';
 import {ProviderOptions} from '@parse/node-apn';
 import {
   PushMessage,
@@ -20,10 +21,7 @@ export interface ApnsConfigType {
 
 export interface ApnsMessage extends PushMessage {
   receiver: ApnsReceiver;
-  options: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any; //NOSONAR
-  };
+  options: AnyObject;
 }
 export interface ApnsReceiver extends PushReceiver {
   to: ApnsSubscriber[];

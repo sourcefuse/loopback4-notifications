@@ -1,3 +1,4 @@
+import {AnyObject} from '@loopback/repository';
 export interface INotification {
   publish(message: Message): Promise<void>;
 }
@@ -22,10 +23,7 @@ export interface Config {
   options?: MessageOptions;
 }
 
-export interface MessageOptions {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any; //NOSONAR
-}
+export type MessageOptions = AnyObject;
 
 export interface Subscriber {
   id: string;

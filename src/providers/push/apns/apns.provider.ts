@@ -36,8 +36,8 @@ export class ApnsProvider implements Provider<AnyObject> {
       );
     }
 
-    const messageReceiverLength = 500;
-    if (message.receiver.to.length > messageReceiverLength) {
+    const maxReceivers = 500;
+    if (message.receiver.to.length > maxReceivers) {
       throw new HttpErrors.BadRequest(
         'Message receiver count cannot exceed 500 !',
       );
@@ -47,13 +47,12 @@ export class ApnsProvider implements Provider<AnyObject> {
     }
   }
   getMainNote(message: ApnsMessage) {
-    const seconds = 3600;
+    const expiresIn = 3600; // seconds
     const floor = 1000;
-    const badge = 3;
+    const defaultBadgeCount = 3;
     const note = new apns.Notification();
-    note.expiry = Math.floor(Date.now() / floor) + seconds;
-    // Expires 1 hour from now.
-    note.badge = this.apnsConfig?.options.badge ?? badge;
+    note.expiry = Math.floor(Date.now() / floor) + expiresIn; // Expires 1 hour from now.
+    note.badge = this.apnsConfig?.options.badge ?? defaultBadgeCount;
     note.alert = message.body;
     note.payload = {messageFrom: message.options.messageFrom};
     // The topic is usually the bundle identifier of your application.
