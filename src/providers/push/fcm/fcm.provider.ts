@@ -95,7 +95,8 @@ export class FcmProvider implements Provider<FcmNotification> {
           data: {...message.options.data},
         };
 
-        message.options.dryRun = false;
+        // eslint-disable-next-line no-unused-expressions
+        message.options.dryRun ?? false;
         const sendPromise = this.fcmService.messaging().send(msgToTransfer);
         promises.push(sendPromise);
       });
@@ -122,7 +123,8 @@ export class FcmProvider implements Provider<FcmNotification> {
           ...generalMessageObj,
           data: {...message.options.data},
         };
-        message.options.dryRun = false;
+        // eslint-disable-next-line no-unused-expressions
+        message.options.dryRun ?? false;
         const sendPromise = this.fcmService.messaging().send(msgToTransfer);
         promises.push(sendPromise);
       });
