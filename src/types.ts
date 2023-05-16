@@ -1,3 +1,4 @@
+import {AnyObject} from '@loopback/repository';
 export interface INotification {
   publish(message: Message): Promise<void>;
 }
@@ -22,20 +23,13 @@ export interface Config {
   options?: MessageOptions;
 }
 
-export interface MessageOptions {
-  // sonarignore:start
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-  // sonarignore:end
-}
+export type MessageOptions = AnyObject;
 
 export interface Subscriber {
   id: string;
   name?: string;
-  // sonarignore:start
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-  // sonarignore:end
+  [key: string]: any; //NOSONAR
 }
 
 export interface Receiver {

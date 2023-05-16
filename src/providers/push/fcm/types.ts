@@ -36,10 +36,8 @@ export interface FcmMessage extends PushMessage {
     webpush?: admin.messaging.WebpushConfig;
     apns?: admin.messaging.ApnsConfig;
     fcmOptions?: admin.messaging.FcmOptions;
-    // sonarignore:start
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-    // sonarignore:end
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    [key: string]: any; //NOSONAR
   };
 }
 

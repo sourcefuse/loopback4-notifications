@@ -2,10 +2,14 @@ import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 import Pubnub from 'pubnub';
 import {Aps, MessageConfig, PnApns, TargetsType} from '.';
-import {PayloadType} from './types';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
-import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
+import {
+  PayloadType,
+  PubNubMessage,
+  PubNubNotification,
+  PubNubSubscriberType,
+} from './types';
 
 export class PubNubProvider implements Provider<PubNubNotification> {
   constructor(
@@ -56,10 +60,6 @@ export class PubNubProvider implements Provider<PubNubNotification> {
       aps: apsData,
       pnPush: targetTypeData,
     };
-    // const generalMessageObj = {
-    //   pn_gcm: pn_gcm,
-    //   pn_apns: Object.assign(pn_apns, message.options),
-    // };
     return {pnGcm: pnGcm, pnApns: Object.assign(pnApns, message.options)};
   }
   getPublishConfig(message: PubNubMessage) {

@@ -1,12 +1,11 @@
 import {inject, Provider} from '@loopback/core';
+import {AnyObject} from '@loopback/repository';
 import {HttpErrors} from '@loopback/rest';
 import apns from '@parse/node-apn';
 import {ApnsBinding} from './keys';
 import {ApnsConfigType, ApnsMessage, ApnsSubscriberType} from './types';
-// sonarignore:start
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class ApnsProvider implements Provider<any> {
-  // sonarignore:end
+
+export class ApnsProvider implements Provider<AnyObject> {
   constructor(
     @inject(ApnsBinding.Config, {
       optional: true,
@@ -37,7 +36,8 @@ export class ApnsProvider implements Provider<any> {
       );
     }
 
-    if (message.receiver.to.length > 500) {
+    const maxReceivers = 500;
+    if (message.receiver.to.length > maxReceivers) {
       throw new HttpErrors.BadRequest(
         'Message receiver count cannot exceed 500 !',
       );
@@ -47,9 +47,12 @@ export class ApnsProvider implements Provider<any> {
     }
   }
   getMainNote(message: ApnsMessage) {
+    const expiresIn = 3600; // seconds
+    const floor = 1000;
+    const defaultBadgeCount = 3;
     const note = new apns.Notification();
-    note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-    note.badge = this.apnsConfig?.options.badge ?? 3;
+    note.expiry = Math.floor(Date.now() / floor) + expiresIn; // Expires 1 hour from now.
+    note.badge = this.apnsConfig?.options.badge ?? defaultBadgeCount;
     note.alert = message.body;
     note.payload = {messageFrom: message.options.messageFrom};
     // The topic is usually the bundle identifier of your application.

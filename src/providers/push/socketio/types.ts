@@ -1,3 +1,4 @@
+import {AnyObject} from '@loopback/repository';
 import {
   PushMessage,
   PushNotification,
@@ -32,10 +33,5 @@ export interface SocketConfig {
    * Path represents the default socket server endpoint
    */
   defaultPath: string;
-  options: {
-    // sonarignore:start
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-    // sonarignore:end
-  };
+  options: AnyObject;
 }
