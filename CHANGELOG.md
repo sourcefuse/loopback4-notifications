@@ -1,3 +1,30 @@
+## Release [v6.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v6.0.0..v6.0.1) July 14, 2023
+Welcome to the July 14, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/0) :- [](https://github.com/sourcefuse/loopback4-notifications/commit/cb3dd91387e5e84891e021aea3bf189253b7c3dd) was commited on July 14, 2023 by [Shubham P](mailto:shubham.prajapat@sourcefuse.com)
+    
+      - Closes #133
+      
+      - GH-0
+      
+  
+  - [Add ARC Branding in README](https://github.com/sourcefuse/loopback4-notifications/issues/137) :- [docs(chore): add arc branding ](https://github.com/sourcefuse/loopback4-notifications/commit/6a43c5d6afca11d2f6ce8c295394012c0ff94aab) was commited on July 14, 2023 by [Surbhi](mailto:98279679+Surbhi-sharma1@users.noreply.github.com)
+    
+      - add arc branding
+      
+      -  GH-137
+      
+  
+  - [Loopback version update](https://github.com/sourcefuse/loopback4-notifications/issues/126) :- [chore(deps): loopback version update ](https://github.com/sourcefuse/loopback4-notifications/commit/ba011138a55bdb01f56cf8517af8454c858620ba) was commited on July 14, 2023 by [Surbhi](mailto:98279679+Surbhi-sharma1@users.noreply.github.com)
+    
+      - loopback version update
+      
+      -  GH-126
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v5.2.2](https://github.com/sourcefuse/loopback4-notifications/compare/v5.2.1..v5.2.2) April 25, 2023
 Welcome to the April 25, 2023 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
