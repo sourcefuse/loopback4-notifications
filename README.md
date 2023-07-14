@@ -1,15 +1,27 @@
-# loopback4-notifications
+<a href="https://sourcefuse.github.io/arc-docs/arc-api-docs" target="_blank"><img src="https://github.com/sourcefuse/loopback4-microservice-catalog/blob/master/docs/assets/logo-dark-bg.png?raw=true" alt="ARC By SourceFuse logo" title="ARC By SourceFuse" align="right" width="150" /></a>
 
-[![LoopBack](<https://github.com/strongloop/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
+# [loopback4-notifications](https://github.com/sourcefuse/loopback4-notifications)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sourcefuse_loopback4-notifications&metric=alert_status)](https://sonarcloud.io/dashboard?id=sourcefuse_loopback4-notifications)
+<p align="left">
+<a href="https://www.npmjs.com/package/loopback4-notifications">
+<img src="https://img.shields.io/npm/v/loopback4-notifications.svg" alt="npm version" />
+</a>
+<a href="https://github.com/sourcefuse/loopback4-notifications/graphs/contributors" target="_blank">
+<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/sourcefuse/loopback4-notifications">
+</a>
+<a href="https://www.npmjs.com/package/loopback4-notifications" target="_blank">
+<img alt="downloads" src="https://img.shields.io/npm/dw/loopback4-notifications.svg">
+</a>
+<a href="https://github.com/sourcefuse/loopback4-notifications/blob/master/LICENSE">
+<img src="https://img.shields.io/github/license/sourcefuse/loopback4-notifications.svg" alt="License" />
+</a>
+<a href="https://loopback.io/" target="_blank">
+<img alt="Powered By LoopBack 4" src="https://img.shields.io/badge/Powered%20by-LoopBack 4-brightgreen" />
+</a>
+</p>
 
-![Loopback Core Version](https://img.shields.io/npm/dependency-version/loopback4-notifications/@loopback/core?style=flat-square)
 
-[![Latest version](https://img.shields.io/npm/v/loopback4-notifications.svg?style=flat-square)](https://www.npmjs.com/package/loopback4-notifications)
-[![License](https://img.shields.io/github/license/sourcefuse/loopback4-notifications.svg?color=blue&label=License&style=flat-square)](https://github.com/sourcefuse/loopback4-notifications/blob/master/LICENSE)
-[![Downloads](https://img.shields.io/npm/dw/loopback4-notifications.svg?label=Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
-[![Total Downloads](https://img.shields.io/npm/dt/loopback4-notifications.svg?label=Total%20Downloads&style=flat-square&color=blue)](https://www.npmjs.com/package/loopback4-notifications)
+## Overview
 
 This is a loopback-next extension for adding different notification mechanisms vis-à-vis, Push, SMS, Email to any loopback 4 based REST API application or microservice.
 
