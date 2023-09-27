@@ -107,7 +107,7 @@
   ],
   "dependencies": {
     "@loopback/boot": "^6.1.0",
-    "@loopback/context": "^6.1.0",
+    "@loopback/context": "^6.1.2",
     "@loopback/core": "^5.1.0",
     "@loopback/rest": "^13.1.0",
     "tslib": "^2.6.0"
