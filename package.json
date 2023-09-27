@@ -106,7 +106,7 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^6.1.0",
+    "@loopback/boot": "^6.1.2",
     "@loopback/context": "^6.1.0",
     "@loopback/core": "^5.1.0",
     "@loopback/rest": "^13.1.0",
