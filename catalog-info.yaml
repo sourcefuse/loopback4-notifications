@@ -4,6 +4,7 @@ metadata:
   name: loopback4-notifications
   annotations:
     github.com/project-slug: sourcefuse/loopback4-notifications
+    backstage.io/techdocs-ref: dir:.
   namespace: arc
   description: LoopBack 4 extension for setting up various notification mechanisms in loopback4 application, vis-a-vis, Push notification, SMS notification, Email notification.
   tags:
