@@ -1,8 +1,5 @@
 site_name: loopback4-notifications
 site_description: loopback4-notifications
 
-nav:
-  - Introduction: index.md
-
 plugins:
   - techdocs-core
