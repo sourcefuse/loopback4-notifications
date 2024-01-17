@@ -1,5 +1,6 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
+// eslint-disable-next-line  @typescript-eslint/naming-convention
 import Pubnub from 'pubnub';
 import {Aps, MessageConfig, PnApns, TargetsType} from '.';
 import {Config} from '../../../types';
@@ -99,8 +100,8 @@ export class PubNubProvider implements Provider<PubNubNotification> {
           const publishConfig: Pubnub.GrantParameters = {
             authKeys: [config.options.token],
             channels: config.receiver.to.map(receiver => receiver.id),
-            read: config.options.allowRead || true,
-            write: config.options.allowWrite || false,
+            read: config.options.allowRead ?? true,
+            write: config.options.allowWrite ?? false,
             ttl: config.options.ttl,
           };
           await this.pubnubService.grant(publishConfig);
