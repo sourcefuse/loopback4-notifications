@@ -39,7 +39,7 @@ export class SocketIOProvider implements Provider<SocketNotification> {
             );
           }
           this.socketService.emit(
-            message.options?.path || this.socketConfig.defaultPath,
+            message.options?.path ?? this.socketConfig.defaultPath,
             JSON.stringify(message),
           );
         } else {
