@@ -1,6 +1,6 @@
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-// eslint-disable-next-line  @typescript-eslint/naming-convention
+
 import Pubnub from 'pubnub';
 import {Aps, MessageConfig, PnApns, TargetsType} from '.';
 import {Config} from '../../../types';
