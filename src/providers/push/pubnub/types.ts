@@ -1,4 +1,3 @@
-// eslint-disable-next-line  @typescript-eslint/naming-convention
 import Pubnub from 'pubnub';
 import {Config} from '../../../types';
 import {

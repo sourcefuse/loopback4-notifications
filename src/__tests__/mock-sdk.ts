@@ -1,6 +1,5 @@
-// eslint-disable-next-line  @typescript-eslint/naming-convention
 import AWS from 'aws-sdk';
-// eslint-disable-next-line  @typescript-eslint/naming-convention
+
 import Pubnub from 'pubnub';
 import twilio, {Twilio} from 'twilio';
 import {TwilioAuthConfig, TwilioMessage} from '../providers';

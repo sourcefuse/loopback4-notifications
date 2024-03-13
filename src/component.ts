@@ -10,7 +10,7 @@ import {SNSBindings} from './providers/sms/sns/keys';
 
 export class NotificationsComponent implements Component {
   constructor() {
-    // Intentionally left blank
+    // Intentionally left empty
   }
 
   providers?: ProviderMap = {
