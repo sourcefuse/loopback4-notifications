@@ -1,3 +1,20 @@
+## Release [v9.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v8.1.0..v9.0.0) December 9, 2024
+Welcome to the December 9, 2024 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [Android and iOS Push Notification payload using pnGcm and pnApns has been deprecated after June 2024. Need to update the payload to use pn_fcm and pn_apns](https://github.com/sourcefuse/loopback4-notifications/issues/211) :- [feat(provider): previous change was breaking ](https://github.com/sourcefuse/loopback4-notifications/commit/34656ce511f38b1210180d087ff99cbdaca3356c) was commited on December 9, 2024 by [yeshamavani](mailto:83634146+yeshamavani@users.noreply.github.com)
+    
+      - commit for major version bump
+      
+      -  BREAKING CHANGE:
+      
+      - yes
+      
+      -  GH-211
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v8.0.3](https://github.com/sourcefuse/loopback4-notifications/compare/v8.0.2..v8.0.3) June 4, 2024
 Welcome to the June 4, 2024 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
