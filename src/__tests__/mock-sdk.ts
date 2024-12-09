@@ -52,14 +52,14 @@ export class MockMail {
 }
 
 export class MockPubnub {
-  constructor(config: Pubnub.PubnubConfig) {
+  constructor(config: Pubnub.PubNubConfiguration) {
     /* do nothing */
   }
 
-  grant(grantConfig: Pubnub.GrantParameters) {
+  grant(grantConfig: Pubnub.PAM.GrantParameters) {
     /* do nothing */
   }
-  async publish(publishConfig: Pubnub.PublishParameters) {
+  async publish(publishConfig: Pubnub.Publish.PublishParameters) {
     /* do nothing */
   }
 }

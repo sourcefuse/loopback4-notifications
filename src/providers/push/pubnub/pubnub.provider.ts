@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {inject, Provider} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
 
@@ -5,19 +6,13 @@ import Pubnub from 'pubnub';
 import {Aps, MessageConfig, PnApns, TargetsType} from '.';
 import {Config} from '../../../types';
 import {PubnubBindings} from './keys';
-import {
-  PayloadType,
-  PubNubMessage,
-  PubNubNotification,
-  PubNubSubscriberType,
-} from './types';
-
+import {PubNubMessage, PubNubNotification, PubNubSubscriberType} from './types';
 export class PubNubProvider implements Provider<PubNubNotification> {
   constructor(
     @inject(PubnubBindings.Config, {
       optional: true,
     })
-    private readonly pnConfig?: Pubnub.PubnubConfig,
+    private readonly pnConfig?: Pubnub.PubNubConfiguration,
   ) {
     if (this.pnConfig) {
       this.pubnubService = new Pubnub(this.pnConfig);
@@ -30,17 +25,21 @@ export class PubNubProvider implements Provider<PubNubNotification> {
   getGeneralMessageObject(message: PubNubMessage) {
     const commonDataNotification: MessageConfig = Object.assign(
       {
-        title: message.subject,
+        title: message.subject ?? '',
         description: message.body,
+        body: message.body,
       },
       message.options,
     );
-
-    const pnGcm =
-      message.options?.payloadType === PayloadType.Data
-        ? {data: commonDataNotification}
-        : {notification: commonDataNotification};
-
+    const pnFcm = {
+      data: {
+        ...commonDataNotification,
+      },
+      notification: {
+        title: message.subject ?? '',
+        body: message.body,
+      },
+    };
     const apsData: Aps = {
       alert: commonDataNotification,
       key: message.subject,
@@ -59,16 +58,19 @@ export class PubNubProvider implements Provider<PubNubNotification> {
     ];
     const pnApns: PnApns = {
       aps: apsData,
-      pnPush: targetTypeData,
+      pn_push: targetTypeData,
     };
-    return {pnGcm: pnGcm, pnApns: Object.assign(pnApns, message.options)};
+    return {
+      pn_fcm: Object.assign(pnFcm),
+      pn_apns: Object.assign(pnApns, message.options),
+    };
   }
   getPublishConfig(message: PubNubMessage) {
     const generalMessageObj = this.getGeneralMessageObject(message);
-    const publishConfig: Pubnub.PublishParameters = {
+    const publishConfig: Pubnub.Publish.PublishParameters = {
       channel: '',
       message: {
-        title: message.subject,
+        title: message.subject ?? '',
         description: message.body,
         ...generalMessageObj,
       },
@@ -97,7 +99,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
       },
       grantAccess: async (config: Config) => {
         if (config.options?.token && config.options.ttl) {
-          const publishConfig: Pubnub.GrantParameters = {
+          const publishConfig: Pubnub.PAM.GrantParameters = {
             authKeys: [config.options.token],
             channels: config.receiver.to.map(receiver => receiver.id),
             read: config.options.allowRead ?? true,
@@ -115,7 +117,7 @@ export class PubNubProvider implements Provider<PubNubNotification> {
       },
       revokeAccess: async (config: Config) => {
         if (config.options?.token) {
-          const publishConfig: Pubnub.GrantParameters = {
+          const publishConfig: Pubnub.PAM.GrantParameters = {
             channels: config.receiver.to.map(receiver => receiver.id),
             authKeys: [config.options.token],
             read: false,

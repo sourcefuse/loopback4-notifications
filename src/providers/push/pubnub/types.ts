@@ -48,14 +48,15 @@ export interface PubnubAPNSConfig {
   apns2BundleId?: string;
 }
 
-export interface PnGcm {
+export interface PnFcm {
   data?: MessageConfig;
   notification?: MessageConfig;
 }
 
 export interface PnApns {
   aps: Aps;
-  pnPush: TargetsType[];
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  pn_push: TargetsType[];
 }
 
 export interface Aps {
@@ -77,6 +78,6 @@ export interface MessageConfig {
 }
 
 export interface GeneralMessageType {
-  pnApns: PnGcm;
+  pnApns: PnFcm;
 }
-export type PubnubConfig = PubnubAPNSConfig & Pubnub.PubnubConfig;
+export type PubnubConfig = PubnubAPNSConfig & Pubnub.PubNubConfiguration;
