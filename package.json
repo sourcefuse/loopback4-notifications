@@ -106,10 +106,10 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^7.0.2",
+    "@loopback/boot": "^7.0.9",
     "@loopback/context": "^7.0.2",
     "@loopback/core": "^6.0.2",
-    "@loopback/rest": "^14.0.2",
+    "@loopback/rest": "^14.0.9",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
