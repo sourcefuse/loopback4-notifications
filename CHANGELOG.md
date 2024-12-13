@@ -1,3 +1,16 @@
+## Release [v9.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v9.0.0..v9.0.1) December 13, 2024
+Welcome to the December 13, 2024 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [chore(deps): version update ](https://github.com/sourcefuse/loopback4-notifications/commit/9e6b399a9192e43c47b8cfde29da63b2e3c05e76) was commited on December 13, 2024 by [Sunny Tyagi](mailto:107617248+Tyagi-Sunny@users.noreply.github.com)
+    
+      - version update
+      
+      -  gh-0
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v9.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v8.1.0..v9.0.0) December 9, 2024
 Welcome to the December 9, 2024 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
