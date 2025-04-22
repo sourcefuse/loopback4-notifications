@@ -109,7 +109,7 @@
     "@loopback/boot": "^7.0.8",
     "@loopback/context": "^7.0.8",
     "@loopback/core": "^6.1.5",
-    "@loopback/rest": "^14.0.8",
+    "@loopback/rest": "^14.0.12",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
