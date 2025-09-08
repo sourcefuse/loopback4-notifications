@@ -1,3 +1,20 @@
+## Release [v10.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v9.0.1..v10.0.0) September 8, 2025
+Welcome to the September 8, 2025 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [refactor(chore): node and loopback packages version upgrade ](https://github.com/sourcefuse/loopback4-notifications/commit/2a32126deff1f040057f46ae9b02332961f34cbc) was commited on September 8, 2025 by [Vaibhav Bhalla](mailto:vaibhav.bhalla@sourcefuse.com)
+    
+      - node and loopback packages version upgrade
+      
+      - BREAKING CHANGE: yes
+      
+      - GH-237
+      
+      - Co-authored-by: Vaibhav  Bhalla &lt;vaibhav.bhalla@SFSupports-MacBook-Air.local&gt;
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v9.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v9.0.0..v9.0.1) December 13, 2024
 Welcome to the December 13, 2024 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
