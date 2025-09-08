@@ -72,7 +72,7 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "build": "lb-tsc",
@@ -106,18 +106,18 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^7.0.8",
-    "@loopback/context": "^7.0.8",
-    "@loopback/core": "^6.1.5",
-    "@loopback/rest": "^14.0.8",
+    "@loopback/boot": "^8.0.4",
+    "@loopback/context": "^8.0.3",
+    "@loopback/core": "^7.0.3",
+    "@loopback/rest": "^15.0.4",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
-    "@loopback/build": "^11.0.7",
-    "@loopback/eslint-config": "^15.0.4",
-    "@loopback/testlab": "^7.0.7",
+    "@loopback/build": "^12.0.3",
+    "@loopback/eslint-config": "^16.0.1",
+    "@loopback/testlab": "^8.0.3",
     "@parse/node-apn": "^5.1.3",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
