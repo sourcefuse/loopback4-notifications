@@ -39,26 +39,19 @@ export class TwilioProvider implements Provider<TwilioNotification> {
         }
         const publishes = message.receiver.to.map(async receiver => {
           const msg: string = message.body;
+          const isSMS: boolean =
+            receiver.type === TwilioSubscriberType.TextSMSUser;
           const twilioMsgObj: TwilioCreateMessageParams = {
             body: msg,
-            from:
-              receiver.type &&
-              receiver.type === TwilioSubscriberType.TextSMSUser
-                ? String(this.twilioConfig?.smsFrom)
-                : String(this.twilioConfig?.waFrom),
-            to:
-              receiver.type &&
-              receiver.type === TwilioSubscriberType.TextSMSUser
-                ? `+${receiver.id}`
-                : `whatsapp:+${receiver.id}`,
+            from: isSMS
+              ? String(this.twilioConfig?.smsFrom)
+              : String(this.twilioConfig?.waFrom),
+            to: isSMS ? `+${receiver.id}` : `whatsapp:+${receiver.id}`,
+            mediaUrl: message.mediaUrl,
           };
 
           // eslint-disable-next-line no-unused-expressions
-          message.mediaUrl && (twilioMsgObj.mediaUrl = message.mediaUrl);
-
-          // eslint-disable-next-line no-unused-expressions
-          receiver.type &&
-            receiver.type === TwilioSubscriberType.TextSMSUser &&
+          isSMS &&
             this.twilioConfig?.smsStatusCallback &&
             (twilioMsgObj.statusCallback =
               this.twilioConfig?.smsStatusCallback);

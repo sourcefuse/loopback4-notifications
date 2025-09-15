@@ -23,14 +23,11 @@ export class PubNubProvider implements Provider<PubNubNotification> {
 
   pubnubService: Pubnub;
   getGeneralMessageObject(message: PubNubMessage) {
-    const commonDataNotification: MessageConfig = Object.assign(
-      {
-        title: message.subject ?? '',
-        description: message.body,
-        body: message.body,
-      },
-      message.options,
-    );
+    const commonDataNotification: MessageConfig = {
+      title: message.subject ?? '',
+      description: message.body,
+      ...message.options,
+    };
     const pnFcm = {
       data: {
         ...commonDataNotification,
