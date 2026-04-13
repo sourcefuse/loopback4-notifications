@@ -157,7 +157,7 @@
     },
     "twilio": {
       "jsonwebtoken": "9.0.0",
-      "axios": "1.12.2"
+      "axios": "1.15.0"
     },
     "body-parser": {
       "debug": "^4.3.4"
