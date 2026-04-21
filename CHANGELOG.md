@@ -1,3 +1,84 @@
+## Release [v10.1.0](https://github.com/sourcefuse/loopback4-notifications/compare/v10.0.0..v10.1.0) April 21, 2026
+Welcome to the April 21, 2026 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [chore(deps): upgrade project dependencies to latest versions ](https://github.com/sourcefuse/loopback4-notifications/commit/2db445b3181cc684a59f689d8300eefe017f2cf5) was commited on April 21, 2026 by [Sourav](mailto:sourav.kashyap@sourcefuse.com)
+    
+      - * chore(deps): upgrade project dependencies to latest versions
+      
+      - upgrade project dependencies to latest versions
+      
+      - GH-271
+      
+      - * fix(ci): pin trivy-action to immutable commit SHA for supply-chain safety
+      
+      - Agent-Logs-Url:
+      
+      - https://github.com/sourcefuse/loopback4-notifications/sessions/7524a630-bf35-486e-a73e-1541c2fe1e82
+      
+      - Co-authored-by: rohit-sourcefuse
+      
+      - &lt;16935898+rohit-sourcefuse@users.noreply.github.com&gt;
+      
+      - * fix(ci): correct trivy-action commit SHA to valid v0.35.0 SHA
+      
+      - Agent-Logs-Url:
+      
+      - https://github.com/sourcefuse/loopback4-notifications/sessions/e04a6e1d-b349-40c1-aa8f-15cd0f16fb4b
+      
+      - Co-authored-by: rohit-sourcefuse
+      
+      - &lt;16935898+rohit-sourcefuse@users.noreply.github.com&gt;
+      
+      - * chore(deps): upgraded to latest dependencies, comment resolved
+      
+      - * Update main.yaml
+      
+      - * chore(cic-d): Change npm install to npm ci in release workflow
+      
+      - ---------
+      
+      - Co-authored-by: copilot-swe-agent[bot]
+      
+      - &lt;198982749+Copilot@users.noreply.github.com&gt; Co-authored-by: rohit-sourcefuse
+      
+      - &lt;16935898+rohit-sourcefuse@users.noreply.github.com&gt; Co-authored-by: Vinay
+      
+      - Gupta &lt;vinay.gupta@sourcefuse.com&gt; Co-authored-by: yeshamavani
+      
+      - &lt;83634146+yeshamavani@users.noreply.github.com&gt;
+      
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [refactor(chore): fix audit vulnerability ](https://github.com/sourcefuse/loopback4-notifications/commit/1c661f49f3de97c39e6cd3efe64fd370ccc3ad17) was commited on December 16, 2025 by [Piyush Singh Gaur](mailto:piyush.singh@sourcefuse.com)
+    
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/244) :- [chore(ci-cd): trusted publisher using oidc ](https://github.com/sourcefuse/loopback4-notifications/commit/2be6b5f6ad38401fe4e134380698f1aded2d38f6) was commited on October 27, 2025 by [yeshamavani](mailto:83634146+yeshamavani@users.noreply.github.com)
+    
+      - update package json and workflow
+      
+      - GH-244
+      
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/) :- [feat(ci-cd): add trivy scan ](https://github.com/sourcefuse/loopback4-notifications/commit/8bea38faeb13f38d4b2ea0f5710e9d73b395458d) was commited on October 27, 2025 by [Vaibhav Bhalla](mailto:vaibhav.bhalla@sourcefuse.com)
+    
+      - add trivy scan and fix sonarqube issues
+      
+      - GH-239
+      
+      - Co-authored-by: Vaibhav  Bhalla &lt;vaibhav.bhalla@SFSupports-MacBook-Air.local&gt; 
+      
+      - Co-authored-by: yeshamavani &lt;83634146+yeshamavani@users.noreply.github.com&gt;
+      
+  
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/241) :- [refactor(chore): fix audit vulnerability ](https://github.com/sourcefuse/loopback4-notifications/commit/7490e069894e3fbedd96e96ca36befd6a800b307) was commited on October 27, 2025 by [Vaibhav Bhalla](mailto:vaibhav.bhalla@sourcefuse.com)
+    
+      - fix audit vulnerability
+      
+      - GH-241
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v10.0.0](https://github.com/sourcefuse/loopback4-notifications/compare/v9.0.1..v10.0.0) September 8, 2025
 Welcome to the September 8, 2025 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
