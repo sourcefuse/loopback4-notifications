@@ -1,3 +1,16 @@
+## Release [v11.0.1](https://github.com/sourcefuse/loopback4-notifications/compare/v11.0.0..v11.0.1) August 11, 2026
+Welcome to the August 11, 2026 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
+
+  - [](https://github.com/sourcefuse/loopback4-notifications/issues/295) :- [chore(deps): upgrade undici fixing five security advisories ](https://github.com/sourcefuse/loopback4-notifications/commit/e429a1d2d92c5cd098971babd60d0f9b6b125d5e) was commited on August 11, 2026 by [Piyush Singh Gaur](mailto:piyush.singh@sourcefuse.com)
+    
+      - upgrade undici fixing five security advisories
+      
+      - GH-295
+      
+  
+Clink on the above links to understand the changes in detail.
+  ___
+
 ## Release [v10.1.0](https://github.com/sourcefuse/loopback4-notifications/compare/v10.0.0..v10.1.0) April 21, 2026
 Welcome to the April 21, 2026 release of loopback4-notifications. There are many updates in this version that we hope you will like, the key highlights include:
 
